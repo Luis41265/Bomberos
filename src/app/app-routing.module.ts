@@ -11,20 +11,20 @@ const routes: Routes = [
   {
 
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
 
   {
     path: 'registrar-u',
-    loadChildren: () => import('./registrar-u/registrar-u.module').then( m => m.RegistrarUPageModule)
+    loadChildren: () => import('./registrar-u/registrar-u.module').then(m => m.RegistrarUPageModule)
   },
   {
     path: 'notificacion',
-    loadChildren: () => import('./notificacion/notificacion.module').then( m => m.NotificacionPageModule)
+    loadChildren: () => import('./notificacion/notificacion.module').then(m => m.NotificacionPageModule)
   },
 ];
 
