@@ -1,0 +1,44 @@
+app-login {
+  ion-content {
+
+
+    form {
+         min-width: 220px;
+         max-width: 240px;
+         margin: auto;
+         align-items:  center;
+         background: linear-gradient(to right #cb232c, #ce1d61);
+
+    .list- button {
+      margin: auto;
+      width: 300px;
+      height: 170px;
+      ion-button{
+        margin: auto;
+        width: 300px;
+        height: 170px;
+       }
+    }
+ .form_login{
+    margin: auto;
+    min-width: 300px;
+    max-width: 365px;
+    position: relative;
+
+    .smile_login{
+      position: absolute;
+      left: 0px;
+      width: 72%;
+      margin-top: 40%;
+
+        margin-left: 15px;
+    }
+
+ }
+
+
+
+}
+
+  }
+}

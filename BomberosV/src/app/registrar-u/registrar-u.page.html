@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color = "warning">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot = "end">
+      <ion-button [routerLink]="['/home']">
+        <img src="assets\login\home.png" alt="" />
+      </ion-button>
+    </ion-buttons>
+
+    <div class="Titulo_1">
+      <h2>REGISTRARSE</h2>
+    </div>
+  </ion-toolbar>
+
+
+  <form [formGroup]= "formularioRegistro" >
+    <ion-item button>
+      <ion-input
+        autofocus="true"
+        type="text"
+        placeholder="Nombre..."
+        FormControlName="nombre"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        autofocus="true"
+        type="text"
+        placeholder="Apelllido"
+        FormControlName="apellido"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        autofocus="true"
+        type="email"
+        placeholder="Correo"
+        FormControlName="correo"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        autofocus="true"
+        type="number"
+        min = "8"
+        max = "8"
+        placeholder="Telefono"
+        FormControlName="telefono"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        autofocus="true"
+        type="number"
+        placeholder="CUI"
+        FormControlName="cui"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        autofocus="true"
+        type="text"
+        placeholder="Contraseña"
+        type="password"
+        FormControlName="password"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        autofocus="true"
+        type="text"
+        placeholder="Confirmar Contraseña"
+        type="password"
+        FormControlName="confirmarcontraseña"
+      >
+      </ion-input>
+    </ion-item>
+
+
+
+
+    <ion-button (click) = "guardar()"> Registrarse </ion-button>
+
+  </form>
+</ion-header>
+
+
+
+
