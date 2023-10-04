@@ -1,5 +1,24 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="abrirPagina('historial')">Historial</ion-item>
+        <ion-item (click)="abrirPagina('mi-informacion')">Mi Información</ion-item>
+        <ion-item (click)="abrirPagina('notificaciones')">Notificaciones</ion-item>
+        <ion-item (click)="abrirPagina('mis-emergencias')">Mis Emergencias</ion-item>
+        <ion-item (click)="abrirPagina('registrar-bombero')">Registrar Bombero</ion-item>
+        <ion-item (click)="abrirPagina('ingresar-equipo')">Ingresar Equipo</ion-item>
+        <ion-item (click)="abrirPagina('subestaciones')">Subestaciones</ion-item>
+        <ion-item (click)="abrirPagina('tipos-emergencias')">Tipos de Emergencias</ion-item>
+        <ion-item (click)="abrirPagina('mi-informacion')">Mi Información</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>
-
-

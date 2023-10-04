@@ -1,44 +1,52 @@
-app-login {
-  ion-content {
 
-
-    form {
-         min-width: 220px;
-         max-width: 240px;
-         margin: auto;
-         align-items:  center;
-         background: linear-gradient(to right #cb232c, #ce1d61);
-
-    .list- button {
-      margin: auto;
-      width: 300px;
-      height: 170px;
-      ion-button{
-        margin: auto;
-        width: 300px;
-        height: 170px;
-       }
-    }
- .form_login{
-    margin: auto;
-    min-width: 300px;
-    max-width: 365px;
-    position: relative;
-
-    .smile_login{
-      position: absolute;
-      left: 0px;
-      width: 72%;
-      margin-top: 40%;
-
-        margin-left: 15px;
-    }
-
- }
-
-
-
+ion-content {
+  --ion-background-color: #ff0000; /* Color rojo claro */
 }
 
-  }
+.form_login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.smile_login {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --ion-item-background: rgba(255, 255, 255, 0.8); /* Color de fondo de los campos */
+  --ion-item-border-radius: 8px; /* Radio de borde de los campos */
+  margin-bottom: 15px;
+}
+
+ion-input {
+  font-size: 16px;
+}
+
+ion-button {
+  --ion-background-color: #007bff; /* Color de fondo del botón */
+  color: white; /* Color de texto del botón */
+  margin-top: 15px;
+}
+
+ion-button:hover {
+  --ion-background-color: #0056b3; /* Cambiar color al pasar el ratón por encima */
+}
+
+ion-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+ion-toolbar {
+  --ion-background-color: #007bff; /* Color de fondo de la barra de pie */
+}
+
+ion-button.router-link-button {
+  text-transform: uppercase;
+  font-weight: bold;
 }

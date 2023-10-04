@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bienvenido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-menu-toggle>
+      <ion-button [routerLink] = "['/historial']"> Historial </ion-button>
+      <ion-button [routerLink] = "['/notificacion']"> Notificaciones </ion-button>
+      <ion-button [routerLink] = "['/mis-emergencias']"> Mis Emergencias </ion-button>
+      <ion-button [routerLink] = "['/registrar-bombero']"> Registrar Bombero </ion-button>
+      <ion-button [routerLink] = "['/ingresar-equipo']"> Ingresar Equipo </ion-button>
+      <ion-button [routerLink] = "['/subestacion']"> Subestaciones </ion-button>
+      <ion-button [routerLink] = "['/tipos-emergencias']"> Tipos de Emergencias </ion-button>
+      <ion-button [routerLink] = "['/mi-informacion']"> Mi Informacion </ion-button>
+      <ion-button [routerLink] = "['/solicitar-emergencia']"> solicitar emergencia </ion-button>
+    </ion-menu-toggle>
+  </ion-content>
+
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-menu-toggle>
+      <ion-button>Click to open the menu</ion-button>
+    </ion-menu-toggle>
+  </ion-content>
+</div>
+
+<ion-content class="ion-padding ion-text-center page-background">
+  <div class="solicitud-emergencia">
+    <!-- Botón para solicitar apoyo de emergencia -->
+    <ion-button expand="full" (click)="solicitarApoyo()">Solicitar Apoyo de Emergencia</ion-button>
+  </div>
+</ion-content>
+
+<ion-card>
+  <img alt="Silhouette of mountains" src=" ../../assets/login/Escudo.png" />
+  <ion-card-header>
+    <ion-card-title>Bomberos Voluntarios</ion-card-title>
+    <ion-card-subtitle>Ser Bombero</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    Ser bombero voluntario, más que una profesión, es un estilo de vida. En las colonias marginales de la capital, tal como en cualquier municipio o aldea recóndita del país, cuando ya no se sabe dónde encontrar ayuda, allí llega el bombero.
+  </ion-card-content>
+</ion-card>

@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
    iniciarSesion() {
 
         if(this.username == 'usuario' && this.password == 'contrasea '){
-          this.router.navigate(['/home']);
+          this.router.navigate(['/menu']);
 
 
         } else {
