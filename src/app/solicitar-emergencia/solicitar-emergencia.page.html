@@ -18,16 +18,52 @@
 
     <ion-item>
       <ion-label position="stacked">Descripción de la Emergencia</ion-label>
-
+      <ion-input
+        autofocus="true"
+        type="text">
+      </ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Ubicación</ion-label>
-
+      <ion-label position="stacked">Descripción de Ubicacion</ion-label>
+      <ion-input
+        autofocus="true"
+        type="text">
+      </ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Cantidad personas Afectadas</ion-label>
+      <ion-input
+        autofocus="true"
+        type="numeric">
+      </ion-input>
+    </ion-item>
+
+    <!-- <ion-item>
+      <ion-label position="floating">Ubicación</ion-label>
+    </ion-item> -->
   </ion-list>
 
-  <ion-button expand="full" (click)="tomarFoto()">Tomar Foto</ion-button>
+  <ion-item>
+    <ion-label style="color:black" position="stacked">Municipio</ion-label>
+    <ion-select [(ngModel)]="emergency.municipio" name="municipio">
+      <ion-select-option value="Escuintla">Santa Lucia Cotzumalguapa</ion-select-option>
 
-  <ion-button expand="full" (click)="enviarSolicitud()">Enviar Solicitud</ion-button>
+      <!-- Agrega más departamentos según sea necesario -->
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Departamento</ion-label>
+    <ion-select [(ngModel)]="emergency.departamento" name="departamento">
+      <ion-select-option value="Escuintla">Escuintla</ion-select-option>
+      <ion-select-option value="Guatemala">Guatemala</ion-select-option>
+      <ion-select-option value="San Marcos">San Marcos</ion-select-option>
+      <!-- Agrega más departamentos según sea necesario -->
+    </ion-select>
+  </ion-item>
+  <ion-button color="medium" expand="full" (click)="tomarFoto()">Tomar Foto</ion-button>
+
+  <ion-button color="medium" expand="full" (click)="enviarSolicitud()">Enviar Solicitud</ion-button>
 </ion-content>

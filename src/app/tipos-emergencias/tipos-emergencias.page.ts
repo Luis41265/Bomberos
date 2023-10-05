@@ -12,7 +12,7 @@ import {
   styleUrls: ['./tipos-emergencias.page.scss'],
 })
 export class TiposEmergenciasPage implements OnInit {
-  emergency = {
+    emergency = {
     name: '',
     priority: '',
     color: '',
