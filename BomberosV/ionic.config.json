@@ -1,7 +1,0 @@
-{
-  "name": "BomberosV",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
