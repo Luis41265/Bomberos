@@ -10,7 +10,11 @@ import {  CameraResultType, CameraSource } from '@capacitor/camera';
   styleUrls: ['./solicitar-emergencia.page.scss'],
 })
 export class SolicitarEmergenciaPage implements OnInit {
+  emergency = {
+    departamento: '',
+    municipio: '',
 
+  };
 
   constructor() { }
 
