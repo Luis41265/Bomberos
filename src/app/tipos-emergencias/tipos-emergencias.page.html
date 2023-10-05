@@ -1,13 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>TiposEmergencias</ion-title>
+    <ion-title>Tipo  Emergencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">TiposEmergencias</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre de Emergencia</ion-label>
+      <ion-input [(ngModel)]="emergency.name" name="name" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Prioridad</ion-label>
+      <ion-select [(ngModel)]="emergency.priority" name="priority" required>
+        <ion-select-option value="alta">Alta</ion-select-option>
+        <ion-select-option value="media">Media</ion-select-option>
+        <ion-select-option value="baja">Baja</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Color de Emergencia</ion-label>
+      <ion-input [(ngModel)]="emergency.color" name="color" type="color"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select [(ngModel)]="emergency.status" name="status" required>
+        <ion-select-option value="pendiente">Pendiente</ion-select-option>
+        <ion-select-option value="en_curso">En Curso</ion-select-option>
+        <ion-select-option value="cerrada">Cerrada</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="registrartipoEmergencia()">Registrar Emergencia</ion-button>
 </ion-content>
