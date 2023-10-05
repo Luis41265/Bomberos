@@ -18,8 +18,11 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "es2020",
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
     "lib": [
-      "es2018", 
+      "es2018",
       "dom"
     ],
     "useDefineForClassFields": false
