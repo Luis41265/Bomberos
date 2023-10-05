@@ -1,0 +1,37 @@
+/* nombre-de-la-pagina.page.scss */
+
+/* Estilos para el encabezado */
+ion-header {
+  ion-toolbar {
+    --background: #3498db; /*  color de fondo del encabezado */
+    --color: #fff; /* color del texto en el encabezado */
+  }
+}
+
+/* Estilos para el contenido */
+ion-content {
+  ion-list {
+    ion-item {
+      /* Estilos para los elementos de la lista */
+      ion-label {
+        font-weight: bold; /* Hace que las etiquetas sean negritas */
+      }
+
+      ion-select {
+        --border-color: #3498db; /* color del borde del ion-select */
+        --color: #3498db; /* color del texto del ion-select */
+      }
+
+      ion-input {
+        --border-color: #3498db; /* color del borde del ion-input */
+        --color: #3498db; /* color del texto del ion-input */
+      }
+    }
+
+    /* Estilos para el botón */
+    ion-button {
+      --background: #3498db; /*  color de fondo del botón */
+      --color: #fff; /*  color del texto en el botón */
+    }
+  }
+}
