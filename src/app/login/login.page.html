@@ -45,15 +45,16 @@
         </ion-item> -->
       </form>
 
-      <ion-footer>
-        <ion-toolbar color = "medium">
-          <ion-buttons slot = "end">
-            <ion-button [routerLink] = "['/registrar-u']"> Registrarse  Aqui </ion-button>
-          </ion-buttons>
 
-        </ion-toolbar>
+      <ion-label>No tienes usuario? </ion-label>
+      <ion-buttons color="medium" slot="end" class="ion-text-center">
+        <ion-button color="dark" expand="full" [routerLink]="['/registrar-u']">
+          <span class="underline-text">Registrarse Aquí</span>
+        </ion-button>
+      </ion-buttons>
 
-      </ion-footer>
+
+
 
       <!-- <ion-footer>
         <ion-toolbar color = "medium">

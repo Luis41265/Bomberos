@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -9,7 +10,8 @@ export class MenuPage implements OnInit {
 
 
 
-  constructor() { }
+  constructor(private router: Router) { }
+
 
   ngOnInit() {
   }
@@ -19,6 +21,8 @@ export class MenuPage implements OnInit {
   navegar(){
 
   }
-
+  cerrarApp(){
+    this.router.navigate(['/login']);
+  }
 
 }

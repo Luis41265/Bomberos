@@ -57,7 +57,11 @@ const routes: Routes = [
   {
     path: 'mi-informacion',
     loadChildren: () => import('./mi-informacion/mi-informacion.module').then( m => m.MiInformacionPageModule)
+  },  {
+    path: 'comandante-admin',
+    loadChildren: () => import('./comandante-admin/comandante-admin.module').then( m => m.ComandanteAdminPageModule)
   },
+
 ];
 
 @NgModule({
