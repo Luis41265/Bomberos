@@ -25,7 +25,7 @@ export class ApirestService {
   /**
    * Url base del servidor donde se encuentran nuestros endpoints
    */
-  url:string="http://172.24.178.155/";
+  url:string="http://localhost:8080/PgCBV-1/api/";
   constructor(private http: HttpClient, public platform: Platform
     , private alertController:AlertController,
               private router:Router) {
