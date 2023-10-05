@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
-const { Camera } = Plugins;
+import {  CameraResultType, CameraSource } from '@capacitor/camera';
+
+
+
 
 @Component({
   selector: 'app-solicitar-emergencia',
