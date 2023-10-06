@@ -89,7 +89,7 @@ export class EmergenciaService {
     this.apirest.delete<Emergencia>(urlDelete, emergencia).subscribe(result=>{
         console.log("Resultado de eliminar la emergencia: ");
         console.log(result);
-        //Eliminamos la Emergencia localmente
+        //Eliminamos la Entidad localmente
         this.emergencias=this.emergencias.filter(emergencia=>{
           return emergencia.Id_Emergencia!==result.Id_Emergencia;
         })
