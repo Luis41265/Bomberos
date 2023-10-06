@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>IngresarEquipo</ion-title>
+    <ion-title>Ingresar Equipo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">IngresarEquipo</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre del Equipo</ion-label>
+      <ion-input [(ngModel)]="equipo.nombre" name="nombre" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select [(ngModel)]="equipo.estado" name="estado" required>
+        <ion-select-option value="En Funcionamiento">En Funcionamiento</ion-select-option>
+        <ion-select-option value="En Mantenimiento">En Mantenimiento</ion-select-option>
+        <ion-select-option value="Fuera de Servicio">Fuera de Servicio</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cantidad</ion-label>
+      <ion-input [(ngModel)]="equipo.cantidad" name="cantidad" type="number" required></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="guardarEquipo()">Guardar Equipo</ion-button>
 </ion-content>

@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mi-informacion.page.scss'],
 })
 export class MiInformacionPage implements OnInit {
-
+  usuario = {
+    nombre: '',
+    correo: '',
+    telefono: '',
+  };
   constructor() { }
 
   ngOnInit() {
   }
 
+  editarInformacion(){
+
+  }
 }

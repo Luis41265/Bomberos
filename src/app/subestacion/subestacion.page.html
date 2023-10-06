@@ -1,16 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-buttons slot="start">
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
+<ion-header>
   <ion-toolbar>
-    <ion-title>Subestacion</ion-title>
+    <ion-title>Subestación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Subestacion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="subestacion.nombre" name="nombre" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Dirección</ion-label>
+      <ion-input [(ngModel)]="subestacion.direccion" name="direccion" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input [(ngModel)]="subestacion.telefono" name="telefono" type="tel"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Correo Institucional</ion-label>
+      <ion-input [(ngModel)]="subestacion.correoInstitucional" name="correoInstitucional" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Departamento</ion-label>
+      <ion-input [(ngModel)]="subestacion.departamento" name="departamento" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Municipio</ion-label>
+      <ion-input [(ngModel)]="subestacion.municipio" name="municipio" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Alcance Sur</ion-label>
+      <ion-input [(ngModel)]="subestacion.alcanceSur" name="alcanceSur" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Alcance Norte</ion-label>
+      <ion-input [(ngModel)]="subestacion.alcanceNorte" name="alcanceNorte" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Alcance Este</ion-label>
+      <ion-input [(ngModel)]="subestacion.alcanceEste" name="alcanceEste" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Alcance Oeste</ion-label>
+      <ion-input [(ngModel)]="subestacion.alcanceOeste" name="alcanceOeste" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Estado</ion-label>
+      <ion-select [(ngModel)]="subestacion.estado" name="estado">
+        <ion-select-option value="activo">Activo</ion-select-option>
+        <ion-select-option value="inactivo">Inactivo</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="guardarSubestacion()">Guardar Subestación</ion-button>
 </ion-content>
+

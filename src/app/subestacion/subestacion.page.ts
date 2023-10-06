@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubestacionPage implements OnInit {
 
+  subestacion = {
+    nombre: '',
+    direccion: '',
+    telefono: '',
+    correoInstitucional: '',
+    departamento: '',
+    municipio: '',
+    alcanceSur: '',
+    alcanceNorte: '',
+    alcanceEste: '',
+    alcanceOeste: '',
+    estado: 'activo', // Estado por defecto
+  };
   constructor() { }
 
   ngOnInit() {
   }
+  guardarSubestacion(){
 
+  }
 }
