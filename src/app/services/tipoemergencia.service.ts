@@ -9,8 +9,8 @@ import {TipoEmergencia} from "../Entidades/TipoEmergencia";
 })
 export class TipoemergenciaService {
 
-  url:string="tipoemergencia";
-  urldelete:string="/delete";
+  private url:string="tipoemergencia";
+  private urldelete:string="/delete";
   tiposemergencias:TipoEmergencia[];
 
 
@@ -49,7 +49,7 @@ export class TipoemergenciaService {
       });
   }
 
-  guardar(TipoEmergencia:TipoEmergencia):void{
+  update(TipoEmergencia:TipoEmergencia):void{
     this.apirest.post<TipoEmergencia>(this.url, TipoEmergencia).subscribe(result=>{
         console.log("Resultado de guardar Tipo de Emergencia: ");
         console.log(result);
@@ -65,7 +65,7 @@ export class TipoemergenciaService {
       });
   }
 
-  update(TipoEmergencia:TipoEmergencia):void{
+  save(TipoEmergencia:TipoEmergencia):void{
     this.apirest.put<TipoEmergencia>(this.url, TipoEmergencia).subscribe(result=>{
         console.log("Resultado de actualizar Tipo de Emergencia: ");
         console.log(result);

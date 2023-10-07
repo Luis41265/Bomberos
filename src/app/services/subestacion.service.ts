@@ -10,8 +10,8 @@ import {Subestacion} from "../Entidades/Subestacion";
 })
 export class SubestacionService {
 
-  url:string="subestacion";
-  urldelete:string="/delete";
+  private url:string="subestacion";
+  private urldelete:string="/delete";
   subestaciones:Subestacion[];
 
 
@@ -50,7 +50,7 @@ export class SubestacionService {
       });
   }
 
-  guardar(Subestacion:Subestacion):void{
+  update(Subestacion:Subestacion):void{
     this.apirest.post<Subestacion>(this.url, Subestacion).subscribe(result=>{
         console.log("Resultado de guardar la Subestacion: ");
         console.log(result);
@@ -66,7 +66,7 @@ export class SubestacionService {
       });
   }
 
-  update(Subestacion:Subestacion):void{
+  save(Subestacion:Subestacion):void{
     this.apirest.put<Subestacion>(this.url, Subestacion).subscribe(result=>{
         console.log("Resultado de actualizar la Subestacion: ");
         console.log(result);

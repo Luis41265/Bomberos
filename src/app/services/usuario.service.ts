@@ -4,15 +4,17 @@ import {ApirestService} from "./apirest.service";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {Usuario} from "../Entidades/Usuario";
+import {Md5} from "ts-md5";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  url:string="usuario";
-  urldelete:string="/delete";
-  //detallesequiposemergencias:Usuario[];
+  private url:string="usuario";
+  private urlLogin:string="login";
+  private urldelete:string="/delete";
+  private usuario:Usuario;
 
 
   constructor(private apirest:ApirestService, private alertController:AlertController,
@@ -50,7 +52,12 @@ export class UsuarioService {
       });
   }*/
 
-  guardar(Usuario:Usuario):void{
+  getUsuario():Usuario{
+    return this.usuario;
+  }
+
+  update(Usuario:Usuario):void{
+    this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     this.apirest.post<Usuario>(this.url, Usuario).subscribe(result=>{
         console.log("Resultado de guardar Usuario: ");
         console.log(result);
@@ -66,7 +73,27 @@ export class UsuarioService {
       });
   }
 
-  update(Usuario:Usuario):void{
+  login(Usuario:Usuario):void{
+    this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
+    this.apirest.post<Usuario>(this.urlLogin, Usuario).subscribe(result=>{
+        console.log("Resultado de Logear al Usuario: ");
+        console.log(result);
+        this.usuario=result;
+        this.apirest.setToken(result.TokenActual);
+        //this.detallesequiposemergencias.push(result);
+        this.Alert('Bienvenido', 'En que Podemos Apoyarte???');
+        this.router.navigate(['/menu']);
+      },
+      error => {
+        // Puedes pasarle el err en caso de que mandes el mensaje desde el
+        console.log('Sucedio un error al Loguear Usuario');
+        console.log(error);
+        this.AlertError('Usuario No ha sido autenticado exitosamente', 'Vuelva a Intentarlo Por favor!!!');
+      });
+  }
+
+  save(Usuario:Usuario):void{
+    this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     this.apirest.put<Usuario>(this.url, Usuario).subscribe(result=>{
         console.log("Resultado de actualizar Usuario: ");
         console.log(result);
@@ -87,6 +114,7 @@ export class UsuarioService {
   }
 
   delete(Usuario:Usuario):void{
+    this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     let urlDelete=this.url+this.urldelete;
     this.apirest.delete<Usuario>(urlDelete, Usuario).subscribe(result=>{
         console.log("Resultado de eliminar Usuario: ");

@@ -9,8 +9,8 @@ import {DetalleEquipo} from "../Entidades/DetalleEquipo";
 })
 export class DetalleequipoService {
 
-  url:string="detalleequipo";
-  urldelete:string="/delete";
+  private url:string="detalleequipo";
+  private urldelete:string="/delete";
   detallesequiposemergencias:DetalleEquipo[];
 
 
@@ -49,7 +49,7 @@ export class DetalleequipoService {
       });
   }
 
-  guardar(detalle:DetalleEquipo):void{
+  update(detalle:DetalleEquipo):void{
     this.apirest.post<DetalleEquipo>(this.url, detalle).subscribe(result=>{
         console.log("Resultado de guardar el Detalle de Equipo: ");
         console.log(result);
@@ -65,7 +65,7 @@ export class DetalleequipoService {
       });
   }
 
-  update(detalle:DetalleEquipo):void{
+  save(detalle:DetalleEquipo):void{
     this.apirest.put<DetalleEquipo>(this.url, detalle).subscribe(result=>{
         console.log("Resultado de actualizar el Detalle de Equipo: ");
         console.log(result);

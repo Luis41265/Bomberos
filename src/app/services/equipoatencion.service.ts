@@ -8,8 +8,8 @@ import { EquipoAtencion} from "../Entidades/EquipoAtencion";
 })
 export class EquipoatencionService {
 
-  url:string="equipoatencion";
-  urldelete:string="/delete";
+  private url:string="equipoatencion";
+  private urldelete:string="/delete";
   detallesequiposemergencias:EquipoAtencion[];
 
 
@@ -48,7 +48,7 @@ export class EquipoatencionService {
       });
   }
 
-  guardar(equipoAtencion:EquipoAtencion):void{
+  update(equipoAtencion:EquipoAtencion):void{
     this.apirest.post<EquipoAtencion>(this.url, equipoAtencion).subscribe(result=>{
         console.log("Resultado de guardar el Equipo Atención Emergencia: ");
         console.log(result);
@@ -64,7 +64,7 @@ export class EquipoatencionService {
       });
   }
 
-  update(equipoAtencion:EquipoAtencion):void{
+  save(equipoAtencion:EquipoAtencion):void{
     this.apirest.put<EquipoAtencion>(this.url, equipoAtencion).subscribe(result=>{
         console.log("Resultado de actualizar el Equipo Atención Emergencia: ");
         console.log(result);

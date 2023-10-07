@@ -9,8 +9,8 @@ import {DetalleAtencion} from "../Entidades/DetalleAtencion";
 })
 export class DetalleatencionService {
 
-  url:string="detalleatencion";
-  urldelete:string="/delete";
+  private url:string="detalleatencion";
+  private urldelete:string="/delete";
   detallesatencionemergencias:DetalleAtencion[];
 
 
@@ -49,7 +49,7 @@ export class DetalleatencionService {
       });
   }
 
-  guardar(detalle:DetalleAtencion):void{
+  update(detalle:DetalleAtencion):void{
     this.apirest.post<DetalleAtencion>(this.url, detalle).subscribe(result=>{
         console.log("Resultado de guardar el detalle atención de emergencias: ");
         console.log(result);
@@ -65,7 +65,7 @@ export class DetalleatencionService {
       });
   }
 
-  update(detalle:DetalleAtencion):void{
+  save(detalle:DetalleAtencion):void{
     this.apirest.put<DetalleAtencion>(this.url, detalle).subscribe(result=>{
         console.log("Resultado de actualizar el detalle atención de emergencias: ");
         console.log(result);

@@ -8,8 +8,8 @@ import { Notificacion} from "../Entidades/Notificacion";
 })
 export class NotificacionService {
 
-  url:string="alerta";
-  urldelete:string="/delete";
+  private url:string="alerta";
+  private urldelete:string="/delete";
   notificacionesemergencias:Notificacion[];
 
 
@@ -49,7 +49,7 @@ export class NotificacionService {
       });
   }
 
-  guardar(Notificacion:Notificacion):void{
+  update(Notificacion:Notificacion):void{
     this.apirest.post<Notificacion>(this.url, Notificacion).subscribe(result=>{
         console.log("Resultado de guardar la Notificacion de Emergencia: ");
         console.log(result);
@@ -65,7 +65,7 @@ export class NotificacionService {
       });
   }
 
-  update(Notificacion:Notificacion):void{
+  save(Notificacion:Notificacion):void{
     this.apirest.put<Notificacion>(this.url, Notificacion).subscribe(result=>{
         console.log("Resultado de actualizar la Notificacion de Emergencia: ");
         console.log(result);

@@ -8,8 +8,8 @@ import {Fotografia} from "../Entidades/Fotografia";
 })
 export class FotografiaService {
 
-  url:string="fotografia";
-  urldelete:string="/delete";
+  private url:string="fotografia";
+  private urldelete:string="/delete";
   fotografiasemergencias:Fotografia[];
 
 
@@ -48,7 +48,7 @@ export class FotografiaService {
       });
   }
 
-  guardar(Fotografia:Fotografia):void{
+  update(Fotografia:Fotografia):void{
     this.apirest.post<Fotografia>(this.url, Fotografia).subscribe(result=>{
         console.log("Resultado de guardar Fotografia Atención Emergencia: ");
         console.log(result);
@@ -64,7 +64,7 @@ export class FotografiaService {
       });
   }
 
-  update(Fotografia:Fotografia):void{
+  save(Fotografia:Fotografia):void{
     this.apirest.put<Fotografia>(this.url, Fotografia).subscribe(result=>{
         console.log("Resultado de actualizar Fotografia Atención Emergencia: ");
         console.log(result);

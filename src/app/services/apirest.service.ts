@@ -18,14 +18,13 @@ export class ApirestService {
     })
   };
 
-  usuario:Usuario;
 
-  token:string;
+  private token:string;
 
   /**
    * Url base del servidor donde se encuentran nuestros endpoints
    */
-  url:string="http://localhost:8080/PgCBV-1/api/";
+  private url:string="http://localhost:8080/PgCBV-1/api/";
   constructor(private http: HttpClient, public platform: Platform
     , private alertController:AlertController,
               private router:Router) {

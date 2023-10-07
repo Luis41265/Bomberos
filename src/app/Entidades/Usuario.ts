@@ -8,6 +8,7 @@ export class Usuario{
   CUI:string="";
   Telefono?:string;
   Correo:string="";
+  TokenActual:string="";
   Estado:boolean=true;
   created_at?:string;
   updated_at?:string;

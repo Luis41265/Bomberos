@@ -8,8 +8,8 @@ import {Router} from "@angular/router";
 })
 export class EmergenciaService {
 
-  url:string="emergencia";
-  urldelete:string="/delete";
+  private url:string="emergencia";
+  private urldelete:string="/delete";
   emergencias:Emergencia[];
 
 
@@ -48,7 +48,7 @@ export class EmergenciaService {
       });
   }
 
-  guardar(emergencia:Emergencia):void{
+  update(emergencia:Emergencia):void{
     this.apirest.post<Emergencia>(this.url, emergencia).subscribe(result=>{
         console.log("Resultado de guardar la emergencia: ");
         console.log(result);
@@ -64,7 +64,7 @@ export class EmergenciaService {
       });
   }
 
-  update(emergencia:Emergencia):void{
+  save(emergencia:Emergencia):void{
     this.apirest.put<Emergencia>(this.url, emergencia).subscribe(result=>{
         console.log("Resultado de actualizar la emergencia: ");
         console.log(result);

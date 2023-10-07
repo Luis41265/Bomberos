@@ -9,8 +9,8 @@ import {Router} from "@angular/router";
 })
 export class RolService {
 
-  url:string="rol";
-  urldelete:string="/delete";
+  private url:string="rol";
+  private urldelete:string="/delete";
   roles:Rol[];
 
 
@@ -49,7 +49,7 @@ export class RolService {
       });
   }
 
-  guardar(Rol:Rol):void{
+  update(Rol:Rol):void{
     this.apirest.post<Rol>(this.url, Rol).subscribe(result=>{
         console.log("Resultado de guardar el Rol: ");
         console.log(result);
@@ -65,7 +65,7 @@ export class RolService {
       });
   }
 
-  update(Rol:Rol):void{
+  save(Rol:Rol):void{
     this.apirest.put<Rol>(this.url, Rol).subscribe(result=>{
         console.log("Resultado de actualizar el Rol: ");
         console.log(result);
