@@ -7,7 +7,7 @@ import {
 }from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { OAuthModule } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
