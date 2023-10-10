@@ -7,6 +7,17 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ApirestService} from "./services/apirest.service";
 import {TokenInterceptorServiceService} from "./services/token-interceptor-service.service";
+import {CameraService} from "./services/camera.service";
+import {GpsService} from "./services/gps.service";
+import {DetalleatencionService} from "./services/detalleatencion.service";
+import {EmergenciaService} from "./services/emergencia.service";
+import {EquipoatencionService} from "./services/equipoatencion.service";
+import {FotografiaService} from "./services/fotografia.service";
+import {NotificacionService} from "./services/notificacion.service";
+import {RolService} from "./services/rol.service";
+import {SubestacionService} from "./services/subestacion.service";
+import {TipoemergenciaService} from "./services/tipoemergencia.service";
+import {UsuarioService} from "./services/usuario.service";
 
 
 @NgModule({
@@ -18,8 +29,18 @@ import {TokenInterceptorServiceService} from "./services/token-interceptor-servi
       useClass: TokenInterceptorServiceService,
       multi: true
     },
-    ApirestService
-
+    ApirestService,
+    CameraService,
+    GpsService,
+    DetalleatencionService,
+    EmergenciaService,
+    EquipoatencionService,
+    FotografiaService,
+    NotificacionService,
+    RolService,
+    SubestacionService,
+    TipoemergenciaService,
+    UsuarioService
   ],
   bootstrap: [AppComponent],
 })

@@ -1,22 +1,57 @@
 <ion-app>
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menú</ion-title>
-      </ion-toolbar>
-    </ion-header>
+
+
+
+
+
+  <ion-menu menuId="main-menu" contentId="main-content" type="overlay">
+
+<!--    <ion-header>-->
+<!--      <ion-toolbar color="primary">-->
+<!--        <ion-title>Menu</ion-title>-->
+<!--      </ion-toolbar>-->
+<!--    </ion-header>-->
     <ion-content>
-      <ion-list>
-        <ion-item (click)="abrirPagina('historial')">Historial</ion-item>
-        <ion-item (click)="abrirPagina('mi-informacion')">Mi Información</ion-item>
-        <ion-item (click)="abrirPagina('notificaciones')">Notificaciones</ion-item>
-        <ion-item (click)="abrirPagina('mis-emergencias')">Mis Emergencias</ion-item>
-        <ion-item (click)="abrirPagina('registrar-bombero')">Registrar Bombero</ion-item>
-        <ion-item (click)="abrirPagina('ingresar-equipo')">Ingresar Equipo</ion-item>
-        <ion-item (click)="abrirPagina('subestaciones')">Subestaciones</ion-item>
-        <ion-item (click)="abrirPagina('tipos-emergencias')">Tipos de Emergencias</ion-item>
-        <ion-item (click)="abrirPagina('mi-informacion')">Mi Información</ion-item>
-      </ion-list>
+      <div lines="none">
+        <ion-menu-toggle auto-hide="false">
+          <ion-item   >
+            <ion-button [routerLink]="['/historial']" (click)="closeMenu()">HistorialPrueba</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/notificacion']" (click)="closeMenu()" >Notificaciones</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/mis-emergencias']" (click)="closeMenu()">Mis Emergencias</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/registrar-bombero']" (click)="closeMenu()">Registrar Bombero</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/ingresar-equipo']" (click)="closeMenu()">Ingresar Equipo</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/subestacion']" (click)="closeMenu()">Subestaciones</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/tipos-emergencias']" (click)="closeMenu()">Tipos de Emergencias</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/mi-informacion']" (click)="closeMenu()">Mi Información</ion-button>
+          </ion-item>
+
+          <ion-item routerDirection="forward" >
+            <ion-button [routerLink]="['/solicitar-emergencia']" (click)="closeMenu()">Solicitar Emergencia</ion-button>
+          </ion-item>
+
+        </ion-menu-toggle>
+      </div>
     </ion-content>
   </ion-menu>
 
