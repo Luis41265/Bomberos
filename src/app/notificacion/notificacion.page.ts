@@ -7,8 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacionPage implements OnInit {
 
-  constructor() { }
+  notifications: any[] = [];
 
+  constructor() {
+
+    this.notifications = [
+      { userId: '123', emergencyId: '456', dateTime: new Date(), status: 'pendiente' },
+      { userId: '789', emergencyId: '101', dateTime: new Date(), status: 'pendiente' },
+    ];
+  }
+
+
+  changeStatus(notification) {
+    // Cambia el estado de la notificación (por ejemplo, a "leída")
+    notification.status = 'leída';
+    // Guarda el nuevo estado en el almacenamiento local o en tu API
+  }
   ngOnInit() {
   }
 

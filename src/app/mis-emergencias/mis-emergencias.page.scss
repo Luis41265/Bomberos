@@ -1,0 +1,19 @@
+/* mis-emergencias.page.scss */
+
+/* Estilo para la página de "Mis Emergencias" */
+page-mis-emergencias {
+  ion-card {
+    margin: 10px;
+    padding: 10px;
+
+    ion-card-title {
+      font-weight: bold;
+    }
+
+    ion-label {
+      display: block;
+      font-size: 16px;
+      margin: 5px 0;
+    }
+  }
+}

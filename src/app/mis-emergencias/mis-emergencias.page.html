@@ -1,16 +1,49 @@
-<ion-header [translucent]="true">
+<!-- mis-emergencias.page.html -->
+
+<ion-header>
   <ion-buttons slot="start">
     <ion-back-button></ion-back-button>
   </ion-buttons>
   <ion-toolbar>
-    <ion-title>MisEmergencias</ion-title>
+    <ion-title>Mis Emergencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">MisEmergencias</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="page-mis-emergencias">
+  <!-- Sección "Emergencias Atendidas" -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Emergencias Atendidas</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let emergencia of emergenciasAtendidas">
+          <!-- Muestra información sobre emergencias atendidas -->
+          <ion-label>ID: {{ emergencia.id }}</ion-label>
+          <ion-label>Fecha y Hora: {{ emergencia.fecha }}</ion-label>
+          <ion-label>Estado: {{ emergencia.estado }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Sección "Emergencias Solicitadas" -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Emergencias Solicitadas</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let emergencia of emergenciasSolicitadas">
+          <!-- Muestra información sobre emergencias solicitadas -->
+          <ion-label>ID: {{ emergencia.id }}</ion-label>
+          <ion-label>Fecha y Hora: {{ emergencia.fecha }}</ion-label>
+          <ion-label>Estado: {{ emergencia.estado }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+

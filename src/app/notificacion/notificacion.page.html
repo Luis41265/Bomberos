@@ -1,16 +1,25 @@
-<ion-header [translucent]="true">
+<!-- notifications.page.html -->
+<ion-header>
   <ion-buttons slot="start">
     <ion-back-button></ion-back-button>
   </ion-buttons>
-  <ion-toolbar>
-    <ion-title>notificacion</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Notificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">notificacion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list lines="full">
+    <ion-item *ngFor="let notification of notifications">
+      <ion-label class="ion-text-wrap">
+        <h2>ID Usuario: {{ notification.userId }}</h2>
+        <h3>ID Emergencia: {{ notification.emergencyId }}</h3>
+        <p>Fecha y Hora: {{ notification.dateTime | date: 'dd/MM/yyyy HH:mm' }}</p>
+        <p>Estado: {{ notification.status }}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button color="success" (click)="changeStatus(notification)">Cambiar Estado</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
 </ion-content>

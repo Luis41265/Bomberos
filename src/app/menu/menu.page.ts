@@ -16,6 +16,7 @@ export class MenuPage implements OnInit {
   ngOnInit() {
   }
   solicitarApoyo(){
+    this.router.navigate(['/solicitar-emergencia']);
   }
 
   navegar(){
