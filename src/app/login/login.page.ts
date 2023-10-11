@@ -7,9 +7,11 @@ import {
 }from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Usuario } from '../Entidades/Usuario';
-import { Md5 } from 'ts-md5';
-import { ApirestService } from '../services/apirest.service';
+import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
+import {Usuario} from "../Entidades/Usuario";
+import {ApirestService} from "../services/apirest.service";
+import {Md5} from "ts-md5";
+import {UsuarioService} from "../services/usuario.service";
 //import { OAuthModule } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
@@ -42,6 +44,7 @@ export class LoginPage implements OnInit {
     private router : Router,
     private alertController: AlertController,
     private apirest: ApirestService,
+                private usuarioservice:UsuarioService
     ) {
 
     this.loginForm = this.fb.group({
@@ -106,6 +109,25 @@ export class LoginPage implements OnInit {
   }
 
 
+  async Alert(header:string, subheader:string) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subheader,
+      //message: 'Asegurese de utilizar un Id Material que no exista en el Sistema!',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async AlertError(header:string, subheader:string) {
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: subheader,
+      //message: 'Asegurese de utilizar un Id Material que no exista en el Sistema!',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 
 
 
@@ -126,15 +148,63 @@ export class LoginPage implements OnInit {
 
    }
 
-   async  mostrarTelefono (){ const alert = await this.alertController.create({
+  async mostrarTelefono (){ const alert = await this.alertController.create({
     header: 'Número de Teléfono de Bomberos',
     message: 'Llama al número: 54397452',
     buttons: ['Cerrar'],
   });
-
-  await alert.present();}
-  ngOnInit() {
-
   }
 
-}
+    ngOnInit() {
+      // @ts-ignore
+      window.onGoogleLibraryLoad = () => {
+        console.log('Google\'s One-tap sign in script loaded!');
+
+        // @ts-ignore
+        google.accounts.id.initialize({
+          // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
+          client_id: '845227166117-d6nopp7mpmeots7qne3tji8lbaecuo2a.apps.googleusercontent.com',
+          callback: this.handleCredentialResponse, // Whatever function you want to trigger...
+          cancel_on_tap_outside: false,
+          context:'use'
+        });
+
+        console.log('Termino de cargar el cliente de google' )
+
+      };
+    }
+
+    loginGoogle(){
+      // @ts-ignore
+      google.accounts.id.prompt();
+    }
+
+    async handleCredentialResponse(response: CredentialResponse) {
+      console.log('Respuesta de Google: ', response);
+// Decoding  JWT token...
+      let decodedToken: any | null = null;
+      try {
+        decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
+      } catch (e) {
+        console.error('Error while trying to decode token', e);
+      }
+      console.log('decodedToken', decodedToken);
+      this.usuario.Correo=decodedToken.email;
+      this.usuario.Nombre=decodedToken.name;
+      let usuarioExist=false;
+      usuarioExist=await this.usuarioservice.verify(this.usuario);
+      if(usuarioExist){
+
+      }else{
+        this.router.navigate(['/registrar-u']);
+      }
+
+    }
+
+
+
+
+
+
+
+  }

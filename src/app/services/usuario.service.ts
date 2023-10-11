@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {EquipoAtencion} from "../Entidades/EquipoAtencion";
 import {ApirestService} from "./apirest.service";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {Usuario} from "../Entidades/Usuario";
 import {Md5} from "ts-md5";
-
+import { map,  } from 'rxjs/operators'
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +12,7 @@ export class UsuarioService {
 
   private url:string="usuario";
   private urlLogin:string="login";
+  private urlVerify:string=this.url+"/verify";
   private urldelete:string="/delete";
   private usuario:Usuario;
 
@@ -39,18 +39,7 @@ export class UsuarioService {
     });
     await alert.present();
   }
-  /*obtenerEmergencias():void{
-    this.apirest.get<Usuario[]>(this.url).subscribe(result=>{
-        console.log("Detalles de Equipo Emergencias Obtenidos: ");
-        console.log(result);
-        this.detallesequiposemergencias=result;
-      },
-      error => {
-        // Puedes pasarle el err en caso de que mandes el mensaje desde el
-        console.log('Sucedio un error al obtener los Detalles de Equipo Emergencias');
-        console.log(error);
-      });
-  }*/
+
 
   getUsuario():Usuario{
     return this.usuario;
@@ -71,6 +60,34 @@ export class UsuarioService {
         console.log(error);
         this.AlertError('Usuario No ha sido creado exitosamente', 'Vuelva a Intentarlo Por favor!!!');
       });
+  }
+
+  async verify(Usuario:Usuario):Promise<boolean>{
+
+    /*await this.apirest.post<Usuario>(this.urlVerify, Usuario).subscribe(result=>{
+        console.log("Resultado de Verificar al Usuario: ");
+        console.log(result);
+        this.usuario=result;
+        return result.Estado;
+      },
+      error => {
+        // Puedes pasarle el err en caso de que mandes el mensaje desde el
+        console.log('Sucedio un error al Loguear Usuario');
+        console.log(error);
+        return false;
+      });*/
+    let result=false;
+
+    /*await this.apirest.post<Usuario>(this.urlVerify, Usuario).toPromise().then(usuario=>{
+      console.log('Usuario obtenido de la verificación: ', usuario)
+      result= usuario.Estado;
+    }).catch(err=>{
+        console.log("Error capturado al consumir el servicio GET");
+        console.log(err.json);
+      result= false;
+    });*/
+    //return result;
+    return await this.apirest.post<Usuario>(this.urlVerify, Usuario).pipe(map(usuario=>{return usuario.Estado})).toPromise();
   }
 
   login(Usuario:Usuario):void{
