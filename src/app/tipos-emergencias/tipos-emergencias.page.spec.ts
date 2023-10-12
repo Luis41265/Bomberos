@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TiposEmergenciasPage } from './tipos-emergencias.page';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {TiposEmergenciasPage} from './tipos-emergencias.page';
 
 describe('TiposEmergenciasPage', () => {
   let component: TiposEmergenciasPage;

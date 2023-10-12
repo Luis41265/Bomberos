@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Nombre del Equipo</ion-label>
-      <ion-input [(ngModel)]="equipo.nombre" name="nombre" type="text" required></ion-input>
+      <ion-input [(ngModel)]="equipo.nombre" name="nombre" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -25,9 +25,9 @@
 
     <ion-item>
       <ion-label position="floating">Cantidad</ion-label>
-      <ion-input [(ngModel)]="equipo.cantidad" name="cantidad" type="number" required></ion-input>
+      <ion-input [(ngModel)]="equipo.cantidad" name="cantidad" required type="number"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" (click)="guardarEquipo()">Guardar Equipo</ion-button>
+  <ion-button (click)="guardarEquipo()" expand="full">Guardar Equipo</ion-button>
 </ion-content>

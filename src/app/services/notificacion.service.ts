@@ -1,22 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApirestService} from "./apirest.service";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
-import { Notificacion} from "../Entidades/Notificacion";
+import {Notificacion} from "../Entidades/Notificacion";
+
 @Injectable({
   providedIn: 'root'
 })
 export class NotificacionService {
 
-  private url:string="alerta";
-  private urldelete:string="/delete";
-  notificacionesemergencias:Notificacion[];
+  notificacionesemergencias: Notificacion[];
+  private url: string = "alerta";
+  private urldelete: string = "/delete";
 
+  constructor(private apirest: ApirestService, private alertController: AlertController,
+              private router: Router) {
+  }
 
-  constructor(private apirest:ApirestService, private alertController:AlertController,
-              private router:Router) { }
-
-  async Alert(header:string, subheader:string) {
+  async Alert(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -26,7 +27,7 @@ export class NotificacionService {
     await alert.present();
   }
 
-  async AlertError(header:string, subheader:string) {
+  async AlertError(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -35,12 +36,13 @@ export class NotificacionService {
     });
     await alert.present();
   }
-  obtenerEmergencias(idUsuario:number):void{
-    let urlTemp=this.url+"/"+idUsuario;
-    this.apirest.get<Notificacion[]>(urlTemp).subscribe(result=>{
+
+  obtenerEmergencias(idUsuario: number): void {
+    let urlTemp = this.url + "/" + idUsuario;
+    this.apirest.get<Notificacion[]>(urlTemp).subscribe(result => {
         console.log("Notificaciones de Emergencias Obtenidos: ");
         console.log(result);
-        this.notificacionesemergencias=result;
+        this.notificacionesemergencias = result;
       },
       error => {
         // Puedes pasarle el err en caso de que mandes el mensaje desde el
@@ -49,8 +51,8 @@ export class NotificacionService {
       });
   }
 
-  update(Notificacion:Notificacion):void{
-    this.apirest.post<Notificacion>(this.url, Notificacion).subscribe(result=>{
+  update(Notificacion: Notificacion): void {
+    this.apirest.post<Notificacion>(this.url, Notificacion).subscribe(result => {
         console.log("Resultado de guardar la Notificacion de Emergencia: ");
         console.log(result);
         this.notificacionesemergencias.push(result);
@@ -65,13 +67,13 @@ export class NotificacionService {
       });
   }
 
-  save(Notificacion:Notificacion):void{
-    this.apirest.put<Notificacion>(this.url, Notificacion).subscribe(result=>{
+  save(Notificacion: Notificacion): void {
+    this.apirest.put<Notificacion>(this.url, Notificacion).subscribe(result => {
         console.log("Resultado de actualizar la Notificacion de Emergencia: ");
         console.log(result);
-        this.notificacionesemergencias.forEach(temp=>{
-          if(temp.Id_Notificacion===result.Id_Notificacion){
-            temp=result;
+        this.notificacionesemergencias.forEach(temp => {
+          if (temp.Id_Notificacion === result.Id_Notificacion) {
+            temp = result;
           }
         });
         this.Alert('Notificacion de Emergencia ha sido actualizado exitosamente', '');
@@ -85,14 +87,14 @@ export class NotificacionService {
       });
   }
 
-  delete(Notificacion:Notificacion):void{
-    let urlDelete=this.url+this.urldelete;
-    this.apirest.delete<Notificacion>(urlDelete, Notificacion).subscribe(result=>{
+  delete(Notificacion: Notificacion): void {
+    let urlDelete = this.url + this.urldelete;
+    this.apirest.delete<Notificacion>(urlDelete, Notificacion).subscribe(result => {
         console.log("Resultado de eliminar la Notificacion de Emergencia: ");
         console.log(result);
         //Eliminamos la Entidad localmente
-        this.notificacionesemergencias=this.notificacionesemergencias.filter(temp=>{
-          return temp.Id_Notificacion!==result.Id_Notificacion;
+        this.notificacionesemergencias = this.notificacionesemergencias.filter(temp => {
+          return temp.Id_Notificacion !== result.Id_Notificacion;
         })
         this.Alert('Notificacion de Emergencia ha sido eliminado exitosamente', '');
         this.router.navigate(['/menu']);

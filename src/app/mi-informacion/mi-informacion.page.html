@@ -11,19 +11,19 @@
   <ion-list>
     <ion-item>
       <ion-label>Nombre</ion-label>
-      <ion-input [(ngModel)]="usuario.nombre" name="nombre" type="text" disabled></ion-input>
+      <ion-input [(ngModel)]="usuario.nombre" disabled name="nombre" type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Correo Electrónico</ion-label>
-      <ion-input [(ngModel)]="usuario.correo" name="correo" type="email" disabled></ion-input>
+      <ion-input [(ngModel)]="usuario.correo" disabled name="correo" type="email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Teléfono</ion-label>
-      <ion-input [(ngModel)]="usuario.telefono" name="telefono" type="tel" disabled></ion-input>
+      <ion-input [(ngModel)]="usuario.telefono" disabled name="telefono" type="tel"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" (click)="editarInformacion()">Editar Información</ion-button>
+  <ion-button (click)="editarInformacion()" expand="full">Editar Información</ion-button>
 </ion-content>

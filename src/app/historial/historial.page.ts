@@ -1,11 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-}from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+
 @Component({
   selector: 'app-historial',
   templateUrl: './historial.page.html',
@@ -27,7 +21,8 @@ export class HistorialPage implements OnInit {
   ];
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

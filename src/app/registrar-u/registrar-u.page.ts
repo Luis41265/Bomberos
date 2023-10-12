@@ -1,16 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-  ValidationErrors,
-  ValidatorFn,
-  AbstractControl
-}from '@angular/forms';
-  import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
-import {UsuarioService} from "../services/usuario.service";
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AlertController} from '@ionic/angular';
 import {Usuario} from "../Entidades/Usuario";
 
 @Component({
@@ -20,103 +11,94 @@ import {Usuario} from "../Entidades/Usuario";
 })
 export class RegistrarUPage implements OnInit {
 
-  formularioRegistro : FormGroup;
+  formularioRegistro: FormGroup;
 
-  usuario : Usuario = {
-    Id_Usuario:0,
-    Id_Rol:0,
+  usuario: Usuario = {
+    Id_Usuario: 0,
+    Id_Rol: 0,
     Id_Subestacion: 0,
-    Usuario:"",
+    Usuario: "",
     Contraseña: "",
-    Nombre:"",
-    CUI:"",
+    Nombre: "",
+    CUI: "",
     Telefono: '',
     Correo: "",
-    TokenActual:"",
-    Estado:true,
+    TokenActual: "",
+    Estado: true,
   }
 
-  formErrors={
-    'nombre' : "",
-    'apellido' : "",
-    'correo' : "",
-    'telefono' : "",
-    'cui' : "",
-    'contraseña' : "",
-    'confirmarcontraseña' : ""
+  formErrors = {
+    'nombre': "",
+    'apellido': "",
+    'correo': "",
+    'telefono': "",
+    'cui': "",
+    'contraseña': "",
+    'confirmarcontraseña': ""
   };
 
-  validationMessages={
-    'nombre':{
-      'required':'El Nombre del  Usuario es requerido',
+  validationMessages = {
+    'nombre': {
+      'required': 'El Nombre del Usuario es requerido',
     },
-    'apellido':{
-      'required':'El Apellido del  Usuario es requerido',
+    'apellido': {
+      'required': 'El Apellido del Usuario es requerido',
     },
-    'correo':{
-      'required':'El Correo del  Usuario es requerido',
+    'correo': {
+      'required': 'El Correo del Usuario es requerido',
     },
-    'cui':{
-      'required':'El Cui del  Usuario es requerido',
-      ' valorZero' : 'El numero de CUI no puede ser 0'
-    },
-
-    'contraseña':{
-      'required':'La contraseña del   Usuario es requerido',
+    'cui': {
+      'required': 'El Cui del  Usuario es requerido',
+      ' valorZero': 'El numero de CUI no puede ser 0'
     },
 
-    'confirmarcontraseña':{
-      'required':'La confirmacion de contraseña del   Usuario es requerido',
+    'contraseña': {
+      'required': 'La contraseña del Usuario es requerido',
     },
+
+    'confirmarcontraseña': {
+      'required': 'La confirmacion de contraseña del Usuario es requerido',
+    },
+
+  }
+
+  constructor(public fb: FormBuilder, private router: Router,
+              public alertController: AlertController) {
+    this.createForm();
 
   }
 
   public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const valor = control.value;
-        //console.log('Valor obtenido en el validador: '+valor);
-        if(valor===0){
-          return {valorZero:{value: control.value}};
-        }
-      return null;
+    //console.log('Valor obtenido en el validador: '+valor);
+    if (valor === 0) {
+      return {valorZero: {value: control.value}};
+    }
+    return null;
   };
 
-  constructor(public fb: FormBuilder, private router : Router,
-    public alertController: AlertController) {
-      this.createForm();
-
-
-
-
-  }
   createForm(): void {
-  this.formularioRegistro = this.fb.group({
-    Nombre: ["", [Validators.required] ],
-    Apelllido : ["", [Validators.required]],
-    Correo : [this.usuario.Correo, [Validators.required]],
-    Telefono : [this.usuario.Telefono, [Validators.required]],
-    CUI : [this.usuario.CUI, [Validators.required]],
-    Contraseña : ["",[Validators.required] ],
-    ConfirmarContraseña : ["", [Validators.required]]
-  });
+    this.formularioRegistro = this.fb.group({
+      Nombre: ["", [Validators.required]],
+      Apelllido: ["", [Validators.required]],
+      Correo: [this.usuario.Correo, [Validators.required]],
+      Telefono: [this.usuario.Telefono, [Validators.required]],
+      CUI: [this.usuario.CUI, [Validators.required]],
+      Contraseña: ["", [Validators.required]],
+      ConfirmarContraseña: ["", [Validators.required]]
+    });
 
-  this.formularioRegistro.valueChanges
-  .subscribe(data => this.onValueChanged(data));
+    this.formularioRegistro.valueChanges
+      .subscribe(data => this.onValueChanged(data));
 
-  this.onValueChanged(); //Resetear los mensajes de validacion
-    console.log(this.formularioRegistro.value)
-    /*this.formularioRegistro.patchValue(
-      {
-        Correo: this.usuario.Correo
-      }
-    )*/
+    this.onValueChanged(); //Resetear los mensajes de validacion
     console.log(this.formularioRegistro.value)
 
   }
 
 
-ngOnInit() {  }
-
-
+  ngOnInit() {
+  }
 
 
   onValueChanged(data?: any): void {
@@ -143,20 +125,18 @@ ngOnInit() {  }
 
   }
 
- async  guardar (){
-      var f = this.formularioRegistro.value;
+  async guardar() {
+    var f = this.formularioRegistro.value;
+    if (this.formularioRegistro.invalid) {
+      const alert = await this.alertController.create({
+        header: 'Datos Incompletos',
+        message: 'Campos Incompletos',
+        buttons: ['Aceptar']
 
-      if (this.formularioRegistro.invalid){
-        const alert = await this.alertController.create({
-          header : 'Datos Incompletos',
-          message : 'Campos Incompletos',
-          buttons : ['Aceptar']
-
-        });
-
-        await alert.present();
-        return;
-      }
-
+      });
+      await alert.present();
+      return;
     }
+
+  }
 }

@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color = "warning">
+  <ion-toolbar color="warning">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-buttons slot = "end">
+    <ion-buttons slot="end">
       <ion-button [routerLink]="['/Menu']">
-        <img src="assets\login\home.png" alt="" />
+        <img alt="" src="assets\login\home.png"/>
       </ion-button>
     </ion-buttons>
 
@@ -16,86 +16,84 @@
   </ion-toolbar>
 
 
-  <form [formGroup]= "formularioRegistro" >
+  <form [formGroup]="formularioRegistro">
     <ion-item>
       <ion-input
-        autofocus="true"
-        type="text"
-        placeholder="Nombre..."
         FormControlName="Nombre"
-      >
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input
         autofocus="true"
+        placeholder="Nombre..."
         type="text"
-        placeholder="Apelllido"
-        FormControlName="Apelllido"
       >
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-input
+        FormControlName="Apelllido"
         autofocus="true"
-        type="email"
-        placeholder="Correo"
+        placeholder="Apelllido"
+        type="text"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
         FormControlName="Correo"
         [value]="formularioRegistro.controls['Correo'].value"
+        autofocus="true"
+        placeholder="Correo"
+        type="email"
       >
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-input
-        autofocus="true"
-        type="number"
-        min = "8"
-        max = "8"
-        placeholder="Telefono"
         FormControlName="Telefono"
-
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input
         autofocus="true"
+        max="8"
+        min="8"
+        placeholder="Telefono"
         type="number"
-        placeholder="CUI"
+
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
         FormControlName="CUI"
+        autofocus="true"
+        placeholder="CUI"
+        type="number"
       >
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-input
+        FormControlName="Contraseña"
         autofocus="true"
-        type="text"
         placeholder="Contraseña"
         type="password"
-        FormControlName="Contraseña"
+        type="text"
       >
       </ion-input>
     </ion-item>
 
     <ion-item>
       <ion-input
+        FormControlName="ConfirmarContraseña"
         autofocus="true"
-        type="text"
         placeholder="ConfirmarContraseña"
         type="password"
-        FormControlName="ConfirmarContraseña"
+        type="text"
       >
       </ion-input>
     </ion-item>
 
 
-
-
-    <ion-button color="medium" (click) = "guardar()" [disabled]="formularioRegistro.invalid"> Registrarse </ion-button>
+    <ion-button (click)="guardar()" [disabled]="formularioRegistro.invalid" color="medium"> Registrarse</ion-button>
 
   </form>
 </ion-header>

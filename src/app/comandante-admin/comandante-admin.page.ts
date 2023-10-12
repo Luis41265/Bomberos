@@ -1,11 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-}from '@angular/forms';
-import { Route } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-comandante-admin',
@@ -14,7 +7,8 @@ import { Route } from '@angular/router';
 })
 export class ComandanteAdminPage implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

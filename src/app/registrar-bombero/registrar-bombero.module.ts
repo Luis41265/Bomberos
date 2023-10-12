@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { RegistrarBomberoPageRoutingModule } from './registrar-bombero-routing.module';
+import {RegistrarBomberoPageRoutingModule} from './registrar-bombero-routing.module';
 
-import { RegistrarBomberoPage } from './registrar-bombero.page';
+import {RegistrarBomberoPage} from './registrar-bombero.page';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { RegistrarBomberoPage } from './registrar-bombero.page';
   ],
   declarations: [RegistrarBomberoPage]
 })
-export class RegistrarBomberoPageModule {}
+export class RegistrarBomberoPageModule {
+}

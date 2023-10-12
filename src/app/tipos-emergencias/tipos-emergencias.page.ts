@@ -1,10 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-}from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-tipos-emergencias',
@@ -12,18 +6,20 @@ import {
   styleUrls: ['./tipos-emergencias.page.scss'],
 })
 export class TiposEmergenciasPage implements OnInit {
-    emergency = {
+  emergency = {
     name: '',
     priority: '',
     color: '',
     status: '',
   };
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  registrartipoEmergencia(){
+  registrartipoEmergencia() {
 
   }
 }

@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { HistorialPageRoutingModule } from './historial-routing.module';
+import {HistorialPageRoutingModule} from './historial-routing.module';
 
-import { HistorialPage } from './historial.page';
+import {HistorialPage} from './historial.page';
 
 @NgModule({
   imports: [
@@ -18,4 +18,5 @@ import { HistorialPage } from './historial.page';
   ],
   declarations: [HistorialPage]
 })
-export class HistorialPageModule {}
+export class HistorialPageModule {
+}

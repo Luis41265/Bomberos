@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-ingresar-equipo',
@@ -9,12 +9,16 @@ export class IngresarEquipoPage implements OnInit {
   equipo = {
     nombre: '',
     estado: '',
-    cantidad: 0,}
-  constructor() { }
+    cantidad: 0,
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-  guardarEquipo(){
+
+  guardarEquipo() {
 
   }
 

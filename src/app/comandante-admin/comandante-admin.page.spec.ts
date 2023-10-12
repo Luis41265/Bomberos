@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ComandanteAdminPage } from './comandante-admin.page';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComandanteAdminPage} from './comandante-admin.page';
 
 describe('ComandanteAdminPage', () => {
   let component: ComandanteAdminPage;

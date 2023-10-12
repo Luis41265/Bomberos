@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-notificacion',
@@ -12,8 +12,8 @@ export class NotificacionPage implements OnInit {
   constructor() {
 
     this.notifications = [
-      { userId: '123', emergencyId: '456', dateTime: new Date(), status: 'pendiente' },
-      { userId: '789', emergencyId: '101', dateTime: new Date(), status: 'pendiente' },
+      {userId: '123', emergencyId: '456', dateTime: new Date(), status: 'pendiente'},
+      {userId: '789', emergencyId: '101', dateTime: new Date(), status: 'pendiente'},
     ];
   }
 
@@ -23,6 +23,7 @@ export class NotificacionPage implements OnInit {
     notification.status = 'leída';
     // Guarda el nuevo estado en el almacenamiento local o en tu API
   }
+
   ngOnInit() {
   }
 

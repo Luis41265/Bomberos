@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SolicitarEmergenciaPage } from './solicitar-emergencia.page';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {SolicitarEmergenciaPage} from './solicitar-emergencia.page';
 
 describe('SolicitarEmergenciaPage', () => {
   let component: SolicitarEmergenciaPage;

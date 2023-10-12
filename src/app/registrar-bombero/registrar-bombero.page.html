@@ -11,39 +11,39 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input [(ngModel)]="bombero.nombre" name="nombre" type="text" required></ion-input>
+      <ion-input [(ngModel)]="bombero.nombre" name="nombre" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Apellido</ion-label>
-      <ion-input [(ngModel)]="bombero.apellido" name="apellido" type="text" required></ion-input>
+      <ion-input [(ngModel)]="bombero.apellido" name="apellido" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Puesto</ion-label>
-      <ion-input [(ngModel)]="bombero.puesto" name="puesto" type="text" required></ion-input>
+      <ion-input [(ngModel)]="bombero.puesto" name="puesto" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">DPI</ion-label>
-      <ion-input [(ngModel)]="bombero.dpi" name="dpi" type="text" required></ion-input>
+      <ion-input [(ngModel)]="bombero.dpi" name="dpi" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Correo</ion-label>
-      <ion-input [(ngModel)]="bombero.correo" name="correo" type="email" required></ion-input>
+      <ion-input [(ngModel)]="bombero.correo" name="correo" required type="email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]="bombero.password" name="contraseña" type="password" required></ion-input>
+      <ion-input [(ngModel)]="bombero.password" name="contraseña" required type="password"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Confirmación de Contraseña</ion-label>
-      <ion-input [(ngModel)]="confirmacionpassword" name="confirmacionContraseña" type="password" required></ion-input>
+      <ion-input [(ngModel)]="confirmacionpassword" name="confirmacionContraseña" required type="password"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" (click)="registrarBombero()">Registrarse</ion-button>
+  <ion-button (click)="registrarBombero()" expand="full">Registrarse</ion-button>
 </ion-content>

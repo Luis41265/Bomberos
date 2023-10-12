@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {ApirestService} from "./apirest.service";
-import { Router } from '@angular/router';
-import { throwError } from "rxjs";
-import { catchError } from 'rxjs/operators';
+import {Router} from '@angular/router';
+import {throwError} from "rxjs";
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenInterceptorServiceService implements HttpInterceptor {
 
-  constructor(private apirest:ApirestService,
-              private router:Router) { }
+  constructor(private apirest: ApirestService,
+              private router: Router) {
+  }
 
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {

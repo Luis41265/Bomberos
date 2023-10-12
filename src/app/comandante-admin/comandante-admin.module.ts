@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { ComandanteAdminPageRoutingModule } from './comandante-admin-routing.module';
+import {ComandanteAdminPageRoutingModule} from './comandante-admin-routing.module';
 
-import { ComandanteAdminPage } from './comandante-admin.page';
+import {ComandanteAdminPage} from './comandante-admin.page';
 
 @NgModule({
   imports: [
@@ -18,4 +18,5 @@ import { ComandanteAdminPage } from './comandante-admin.page';
   ],
   declarations: [ComandanteAdminPage]
 })
-export class ComandanteAdminPageModule {}
+export class ComandanteAdminPageModule {
+}

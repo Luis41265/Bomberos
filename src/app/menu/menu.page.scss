@@ -1,7 +1,7 @@
 /* Estilos para el encabezado */
 ion-header {
   ion-toolbar {
-    --ion-background-color: #eb445a ; /* Color de fondo del encabezado */
+    --ion-background-color: #eb445a; /* Color de fondo del encabezado */
     color: #333; /* Color del texto del encabezado */
   }
 }
@@ -9,8 +9,9 @@ ion-header {
 /* Estilos para el menú lateral */
 ion-menu {
   ion-content {
-    --ion-background-color: #ffffff ; /* Color de fondo del menú lateral */
+    --ion-background-color: #ffffff; /* Color de fondo del menú lateral */
   }
+
   ion-button {
     color: #333; /* Color del texto de los botones del menú lateral */
   }
@@ -21,8 +22,9 @@ ion-menu {
   ion-content {
     --ion-background-color: #ffffff; /* Color de fondo del contenido principal */
   }
+
   ion-button {
-    --ion-background-color: #EEEB78 ; /* Color de fondo del botón */
+    --ion-background-color: #EEEB78; /* Color de fondo del botón */
     color: #fff; /* Color del texto del botón */
   }
 }
@@ -30,10 +32,11 @@ ion-menu {
 /* Estilos para el botón "Solicitar Apoyo de Emergencia" */
 .solicitud-emergencia {
   ion-button {
-    --ion-background-color: #EEA778 ; /* Color de fondo del botón de solicitud */
+    --ion-background-color: #EEA778; /* Color de fondo del botón de solicitud */
     color: #fff; /* Color del texto del botón de solicitud */
   }
 }
+
 .page-background {
   background: linear-gradient(to bottom, #3498db, #2980b9); /* Puedes cambiar estos colores */
   height: 100%; /* Esto asegura que el fondo ocupe toda la pantalla vertical */

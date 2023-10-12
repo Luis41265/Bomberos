@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-mis-emergencias',
@@ -9,7 +9,8 @@ export class MisEmergenciasPage implements OnInit {
   emergenciasAtendidas: any[] = []; // Carga aquí las emergencias atendidas
   emergenciasSolicitadas: any[] = []; // Carga aquí las emergencias solicitadas
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

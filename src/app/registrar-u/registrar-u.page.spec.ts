@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RegistrarUPage } from './registrar-u.page';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {RegistrarUPage} from './registrar-u.page';
 
 describe('RegistrarUPage', () => {
   let component: RegistrarUPage;

@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NotificacionPage } from './notificacion.page';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {NotificacionPage} from './notificacion.page';
 
 describe('NotificacionPage', () => {
   let component: NotificacionPage;

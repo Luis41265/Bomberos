@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Rol} from "../Entidades/Rol";
 import {ApirestService} from "./apirest.service";
 import {AlertController} from "@ionic/angular";
@@ -9,15 +9,15 @@ import {Router} from "@angular/router";
 })
 export class RolService {
 
-  private url:string="rol";
-  private urldelete:string="/delete";
-  roles:Rol[];
+  roles: Rol[];
+  private url: string = "rol";
+  private urldelete: string = "/delete";
 
+  constructor(private apirest: ApirestService, private alertController: AlertController,
+              private router: Router) {
+  }
 
-  constructor(private apirest:ApirestService, private alertController:AlertController,
-              private router:Router) { }
-
-  async Alert(header:string, subheader:string) {
+  async Alert(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -27,7 +27,7 @@ export class RolService {
     await alert.present();
   }
 
-  async AlertError(header:string, subheader:string) {
+  async AlertError(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -36,11 +36,12 @@ export class RolService {
     });
     await alert.present();
   }
-  obtenerEmergencias():void{
-    this.apirest.get<Rol[]>(this.url).subscribe(result=>{
+
+  obtenerEmergencias(): void {
+    this.apirest.get<Rol[]>(this.url).subscribe(result => {
         console.log("Roles Obtenidos: ");
         console.log(result);
-        this.roles=result;
+        this.roles = result;
       },
       error => {
         // Puedes pasarle el err en caso de que mandes el mensaje desde el
@@ -49,8 +50,8 @@ export class RolService {
       });
   }
 
-  update(Rol:Rol):void{
-    this.apirest.post<Rol>(this.url, Rol).subscribe(result=>{
+  update(Rol: Rol): void {
+    this.apirest.post<Rol>(this.url, Rol).subscribe(result => {
         console.log("Resultado de guardar el Rol: ");
         console.log(result);
         this.roles.push(result);
@@ -65,13 +66,13 @@ export class RolService {
       });
   }
 
-  save(Rol:Rol):void{
-    this.apirest.put<Rol>(this.url, Rol).subscribe(result=>{
+  save(Rol: Rol): void {
+    this.apirest.put<Rol>(this.url, Rol).subscribe(result => {
         console.log("Resultado de actualizar el Rol: ");
         console.log(result);
-        this.roles.forEach(temp=>{
-          if(temp.Id_Rol===result.Id_Rol){
-            temp=result;
+        this.roles.forEach(temp => {
+          if (temp.Id_Rol === result.Id_Rol) {
+            temp = result;
           }
         });
         this.Alert('Rol ha sido actualizado exitosamente', '');
@@ -85,14 +86,14 @@ export class RolService {
       });
   }
 
-  delete(Rol:Rol):void{
-    let urlDelete=this.url+this.urldelete;
-    this.apirest.delete<Rol>(urlDelete, Rol).subscribe(result=>{
+  delete(Rol: Rol): void {
+    let urlDelete = this.url + this.urldelete;
+    this.apirest.delete<Rol>(urlDelete, Rol).subscribe(result => {
         console.log("Resultado de eliminar el Rol: ");
         console.log(result);
         //Eliminamos la Entidad localmente
-        this.roles=this.roles.filter(temp=>{
-          return temp.Id_Rol!==result.Id_Rol;
+        this.roles = this.roles.filter(temp => {
+          return temp.Id_Rol !== result.Id_Rol;
         })
         this.Alert('Rol ha sido eliminado exitosamente', '');
         this.router.navigate(['/menu']);

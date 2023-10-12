@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { NotificacionPageRoutingModule } from './notificacion-routing.module';
+import {NotificacionPageRoutingModule} from './notificacion-routing.module';
 
-import { NotificacionPage } from './notificacion.page';
+import {NotificacionPage} from './notificacion.page';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { NotificacionPage } from './notificacion.page';
   ],
   declarations: [NotificacionPage]
 })
-export class NotificacionPageModule {}
+export class NotificacionPageModule {
+}

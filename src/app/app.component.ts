@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import {MenuController, Platform} from '@ionic/angular';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {MenuController} from '@ionic/angular';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -8,14 +9,15 @@ import {MenuController, Platform} from '@ionic/angular';
 })
 export class AppComponent {
   constructor(private router: Router, private menu: MenuController
-    ) {}
+  ) {
+  }
 
   abrirPagina(pagina: string) {
     this.router.navigate([pagina]);
   }
 
 
-  closeMenu() :void {
+  closeMenu(): void {
     this.menu.enable(false);
     this.menu.enable(true);
   }

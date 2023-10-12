@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-subestacion',
@@ -20,11 +20,14 @@ export class SubestacionPage implements OnInit {
     alcanceOeste: '',
     estado: 'activo', // Estado por defecto
   };
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-  guardarSubestacion(){
+
+  guardarSubestacion() {
 
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-mi-informacion',
@@ -11,12 +11,14 @@ export class MiInformacionPage implements OnInit {
     correo: '',
     telefono: '',
   };
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  editarInformacion(){
+  editarInformacion() {
 
   }
 }

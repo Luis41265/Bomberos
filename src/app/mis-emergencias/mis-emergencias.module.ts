@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { MisEmergenciasPageRoutingModule } from './mis-emergencias-routing.module';
+import {MisEmergenciasPageRoutingModule} from './mis-emergencias-routing.module';
 
-import { MisEmergenciasPage } from './mis-emergencias.page';
+import {MisEmergenciasPage} from './mis-emergencias.page';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { MisEmergenciasPage } from './mis-emergencias.page';
   ],
   declarations: [MisEmergenciasPage]
 })
-export class MisEmergenciasPageModule {}
+export class MisEmergenciasPageModule {
+}

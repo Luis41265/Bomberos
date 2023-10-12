@@ -1,4 +1,3 @@
-
 <ion-content>
 
   <!-- <ion-header>
@@ -12,74 +11,73 @@
   <div class="form_login">
     <ion-img class="smile_login" src=" ../../assets/login/Escudo.png"></ion-img>
 
-      <!-- CREDENCIALES DEL USUARIO -->
+    <!-- CREDENCIALES DEL USUARIO -->
 
-      <form [formGroup]= "loginForm">
-        <ion-item button>
-          <ion-input
-            autofocus="true"
-            type="text"
-            placeholder="Usuario..."
-            FormControlName="nombre"
-          >
-          </ion-input>
-        </ion-item>
+    <form [formGroup]="loginForm">
+      <ion-item button>
+        <ion-input
+          FormControlName="nombre"
+          autofocus="true"
+          placeholder="Usuario..."
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
 
-        <ion-item>
-          <ion-input
-            autofocus="true"
-            type="text"
-            placeholder="Contraseña"
-            type="password"
-            FormControlName="password"
-          >
-          </ion-input>
-        </ion-item>
-
-
-        <ion-button (click) = "iniciarSesion()"> Iniciar Sesión </ion-button>
-          <!-- [disabled] = "!loginForm || !loginForm.valid"  -->
-
-          <ion-button (click) = "loginGoogle()"> <ion-icon slot="start" name="logo-google"></ion-icon></ion-button>
-          <!-- <ion-item>
-          <ion-text (click) = "Registrarse()"> Registrarse  Aqui</ion-text>
-        </ion-item> -->
-      </form>
+      <ion-item>
+        <ion-input
+          FormControlName="password"
+          autofocus="true"
+          placeholder="Contraseña"
+          type="password"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
 
 
-      <ion-label>No tienes usuario? </ion-label>
-      <ion-buttons color="medium" slot="end" class="ion-text-center">
-        <ion-button color="dark" expand="full" [routerLink]="['/registrar-u']">
-          <span class="underline-text">Registrarse Aquí</span>
-        </ion-button>
-      </ion-buttons>
+      <ion-button (click)="iniciarSesion()"> Iniciar Sesión</ion-button>
+      <!-- [disabled] = "!loginForm || !loginForm.valid"  -->
+
+      <ion-button (click)="loginGoogle()">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+      </ion-button>
+      <!-- <ion-item>
+      <ion-text (click) = "Registrarse()"> Registrarse  Aqui</ion-text>
+    </ion-item> -->
+    </form>
 
 
+    <ion-label>No tienes usuario?</ion-label>
+    <ion-buttons class="ion-text-center" color="medium" slot="end">
+      <ion-button [routerLink]="['/registrar-u']" color="dark" expand="full">
+        <span class="underline-text">Registrarse Aquí</span>
+      </ion-button>
+    </ion-buttons>
 
 
-      <!-- <ion-footer>
-        <ion-toolbar color = "medium">
-          <ion-buttons slot = "end">
-            <ion-button [routerLink] = "['/menu']"> prueba </ion-button>
-          </ion-buttons>
+    <!-- <ion-footer>
+      <ion-toolbar color = "medium">
+        <ion-buttons slot = "end">
+          <ion-button [routerLink] = "['/menu']"> prueba </ion-button>
+        </ion-buttons>
 
-        </ion-toolbar>
+      </ion-toolbar>
 
-      </ion-footer> -->
+    </ion-footer> -->
 
-   <!--   <ion-button>
-        <div class="ion-logo">
-          <ion-icon slot="start" name="logo-google"></ion-icon>
-          Ingresar con Google
-        </div>
-      </ion-button> -->
-
+    <!--   <ion-button>
+         <div class="ion-logo">
+           <ion-icon slot="start" name="logo-google"></ion-icon>
+           Ingresar con Google
+         </div>
+       </ion-button> -->
 
 
   </div>
-    <!-- LOGO DE INGRESO -->
+  <!-- LOGO DE INGRESO -->
   <!-- <div class="logo_Daps">
     <img src="assets\daps\logoBomberos.jpeg" />
   </div> -->
-  <ion-button slot="fixed" class="contact-button" (click)="mostrarTelefono()">Contactar a Bomberos</ion-button>
+  <ion-button (click)="mostrarTelefono()" class="contact-button" slot="fixed">Contactar a Bomberos</ion-button>
 </ion-content>

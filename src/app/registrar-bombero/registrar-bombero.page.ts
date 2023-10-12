@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registrar-bombero',
@@ -18,11 +18,14 @@ export class RegistrarBomberoPage implements OnInit {
   };
   confirmacionpassword = '';
 
-  constructor(private router: Router) { }
-  registrarBombero( ) {
+  constructor(private router: Router) {
+  }
+
+  registrarBombero() {
 
     this.router.navigate(['/login']);
   }
+
   ngOnInit() {
   }
 

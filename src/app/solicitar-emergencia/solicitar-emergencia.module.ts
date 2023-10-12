@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { SolicitarEmergenciaPageRoutingModule } from './solicitar-emergencia-routing.module';
+import {SolicitarEmergenciaPageRoutingModule} from './solicitar-emergencia-routing.module';
 
-import { SolicitarEmergenciaPage } from './solicitar-emergencia.page';
+import {SolicitarEmergenciaPage} from './solicitar-emergencia.page';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { SolicitarEmergenciaPage } from './solicitar-emergencia.page';
   ],
   declarations: [SolicitarEmergenciaPage]
 })
-export class SolicitarEmergenciaPageModule {}
+export class SolicitarEmergenciaPageModule {
+}

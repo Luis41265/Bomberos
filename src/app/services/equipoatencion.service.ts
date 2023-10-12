@@ -1,22 +1,23 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApirestService} from "./apirest.service";
 import {AlertController} from "@ionic/angular";
 import {Router} from "@angular/router";
-import { EquipoAtencion} from "../Entidades/EquipoAtencion";
+import {EquipoAtencion} from "../Entidades/EquipoAtencion";
+
 @Injectable({
   providedIn: 'root'
 })
 export class EquipoatencionService {
 
-  private url:string="equipoatencion";
-  private urldelete:string="/delete";
-  detallesequiposemergencias:EquipoAtencion[];
+  detallesequiposemergencias: EquipoAtencion[];
+  private url: string = "equipoatencion";
+  private urldelete: string = "/delete";
 
+  constructor(private apirest: ApirestService, private alertController: AlertController,
+              private router: Router) {
+  }
 
-  constructor(private apirest:ApirestService, private alertController:AlertController,
-              private router:Router) { }
-
-  async Alert(header:string, subheader:string) {
+  async Alert(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -26,7 +27,7 @@ export class EquipoatencionService {
     await alert.present();
   }
 
-  async AlertError(header:string, subheader:string) {
+  async AlertError(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -35,11 +36,12 @@ export class EquipoatencionService {
     });
     await alert.present();
   }
-  obtenerEmergencias():void{
-    this.apirest.get<EquipoAtencion[]>(this.url).subscribe(result=>{
+
+  obtenerEmergencias(): void {
+    this.apirest.get<EquipoAtencion[]>(this.url).subscribe(result => {
         console.log("Detalles de Equipo Emergencias Obtenidos: ");
         console.log(result);
-        this.detallesequiposemergencias=result;
+        this.detallesequiposemergencias = result;
       },
       error => {
         // Puedes pasarle el err en caso de que mandes el mensaje desde el
@@ -48,8 +50,8 @@ export class EquipoatencionService {
       });
   }
 
-  update(equipoAtencion:EquipoAtencion):void{
-    this.apirest.post<EquipoAtencion>(this.url, equipoAtencion).subscribe(result=>{
+  update(equipoAtencion: EquipoAtencion): void {
+    this.apirest.post<EquipoAtencion>(this.url, equipoAtencion).subscribe(result => {
         console.log("Resultado de guardar el Equipo Atención Emergencia: ");
         console.log(result);
         this.detallesequiposemergencias.push(result);
@@ -64,13 +66,13 @@ export class EquipoatencionService {
       });
   }
 
-  save(equipoAtencion:EquipoAtencion):void{
-    this.apirest.put<EquipoAtencion>(this.url, equipoAtencion).subscribe(result=>{
+  save(equipoAtencion: EquipoAtencion): void {
+    this.apirest.put<EquipoAtencion>(this.url, equipoAtencion).subscribe(result => {
         console.log("Resultado de actualizar el Equipo Atención Emergencia: ");
         console.log(result);
-        this.detallesequiposemergencias.forEach(temp=>{
-          if(temp.Id_Equipo===result.Id_Equipo){
-            temp=result;
+        this.detallesequiposemergencias.forEach(temp => {
+          if (temp.Id_Equipo === result.Id_Equipo) {
+            temp = result;
           }
         });
         this.Alert('Equipo Atención Emergencia ha sido actualizado exitosamente', '');
@@ -84,14 +86,14 @@ export class EquipoatencionService {
       });
   }
 
-  delete(equipoAtencion:EquipoAtencion):void{
-    let urlDelete=this.url+this.urldelete;
-    this.apirest.delete<EquipoAtencion>(urlDelete, equipoAtencion).subscribe(result=>{
+  delete(equipoAtencion: EquipoAtencion): void {
+    let urlDelete = this.url + this.urldelete;
+    this.apirest.delete<EquipoAtencion>(urlDelete, equipoAtencion).subscribe(result => {
         console.log("Resultado de eliminar El Equipo Atención Emergencia: ");
         console.log(result);
         //Eliminamos la Entidad localmente
-        this.detallesequiposemergencias=this.detallesequiposemergencias.filter(temp=>{
-          return temp.Id_Equipo!==result.Id_Equipo;
+        this.detallesequiposemergencias = this.detallesequiposemergencias.filter(temp => {
+          return temp.Id_Equipo !== result.Id_Equipo;
         })
         this.Alert('Equipo Atención Emergencia ha sido eliminado exitosamente', '');
         this.router.navigate(['/menu']);

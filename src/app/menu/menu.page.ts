@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -9,20 +9,22 @@ import { Router } from '@angular/router';
 export class MenuPage implements OnInit {
 
 
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
 
   ngOnInit() {
   }
-  solicitarApoyo(){
+
+  solicitarApoyo() {
     this.router.navigate(['/solicitar-emergencia']);
   }
 
-  navegar(){
+  navegar() {
 
   }
-  cerrarApp(){
+
+  cerrarApp() {
     this.router.navigate(['/login']);
   }
 

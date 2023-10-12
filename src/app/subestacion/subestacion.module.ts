@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { SubestacionPageRoutingModule } from './subestacion-routing.module';
+import {SubestacionPageRoutingModule} from './subestacion-routing.module';
 
-import { SubestacionPage } from './subestacion.page';
+import {SubestacionPage} from './subestacion.page';
 
 @NgModule({
   imports: [
@@ -17,4 +17,5 @@ import { SubestacionPage } from './subestacion.page';
   ],
   declarations: [SubestacionPage]
 })
-export class SubestacionPageModule {}
+export class SubestacionPageModule {
+}

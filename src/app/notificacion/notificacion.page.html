@@ -18,7 +18,7 @@
         <p>Estado: {{ notification.status }}</p>
       </ion-label>
       <ion-buttons slot="end">
-        <ion-button color="success" (click)="changeStatus(notification)">Cambiar Estado</ion-button>
+        <ion-button (click)="changeStatus(notification)" color="success">Cambiar Estado</ion-button>
       </ion-buttons>
     </ion-item>
   </ion-list>

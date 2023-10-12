@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Tipo de Emergencia</ion-label>
-      <ion-select >
+      <ion-select>
         <ion-select-option value="incendio">Incendio</ion-select-option>
         <ion-select-option value="accidente">Accidente de Tráfico</ion-select-option>
         <ion-select-option value="rescate">Rescate</ion-select-option>
@@ -49,7 +49,7 @@
   </ion-list>
 
   <ion-item>
-    <ion-label style="color:black" position="stacked">Municipio</ion-label>
+    <ion-label position="stacked" style="color:black">Municipio</ion-label>
     <ion-select [(ngModel)]="emergency.municipio" name="municipio">
       <ion-select-option value="Escuintla">Santa Lucia Cotzumalguapa</ion-select-option>
 
@@ -66,7 +66,7 @@
       <!-- Agrega más departamentos según sea necesario -->
     </ion-select>
   </ion-item>
-  <ion-button color="medium" expand="full" (click)="tomarFoto()">Tomar Foto</ion-button>
+  <ion-button (click)="tomarFoto()" color="medium" expand="full">Tomar Foto</ion-button>
 
-  <ion-button color="medium" expand="full" (click)="enviarSolicitud()">Enviar Solicitud</ion-button>
+  <ion-button (click)="enviarSolicitud()" color="medium" expand="full">Enviar Solicitud</ion-button>
 </ion-content>

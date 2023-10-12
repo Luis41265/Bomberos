@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Tipo  Emergencias</ion-title>
+    <ion-title>Tipo Emergencias</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +11,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">Nombre de Emergencia</ion-label>
-      <ion-input [(ngModel)]="emergency.name" name="name" type="text" required></ion-input>
+      <ion-input [(ngModel)]="emergency.name" name="name" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -38,5 +38,5 @@
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" (click)="registrartipoEmergencia()">Registrar Emergencia</ion-button>
+  <ion-button (click)="registrartipoEmergencia()" expand="full">Registrar Emergencia</ion-button>
 </ion-content>
