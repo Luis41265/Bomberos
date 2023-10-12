@@ -4,6 +4,9 @@ import {
   FormControl,
   Validators,
   FormBuilder,
+  ValidationErrors,
+  ValidatorFn,
+  AbstractControl
 }from '@angular/forms';
   import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -33,55 +36,73 @@ export class RegistrarUPage implements OnInit {
     Estado:true,
   }
 
-  formErrors = {
-    'Id_Material': "",
-    'Descripcion': "",
-    'Cantidad_Existente': "",
-    'Id_Tarjeta_NFC': ""
-
+  formErrors={
+    'nombre' : "",
+    'apellido' : "",
+    'correo' : "",
+    'telefono' : "",
+    'cui' : "",
+    'contraseña' : "",
+    'confirmarcontraseña' : ""
   };
 
-  validationMessages = {
-    'Id_Material': {
-      'required': 'El Id Material es requerido',
-      'valorZero': 'El Id Material No Puede ser 0',
+  validationMessages={
+    'nombre':{
+      'required':'El Nombre del  Usuario es requerido',
+    },
+    'apellido':{
+      'required':'El Apellido del  Usuario es requerido',
+    },
+    'correo':{
+      'required':'El Correo del  Usuario es requerido',
+    },
+    'cui':{
+      'required':'El Cui del  Usuario es requerido',
+      ' valorZero' : 'El numero de CUI no puede ser 0'
     },
 
-    'Descripcion': {
-      'required': 'La descripción del material es requerida'
+    'contraseña':{
+      'required':'La contraseña del   Usuario es requerido',
     },
 
-    'Cantidad_Existente': {
-      'required': 'La cantidad existente del material es requerida',
-      'valorZero': 'La cantidad existente No Puede ser 0'
+    'confirmarcontraseña':{
+      'required':'La confirmacion de contraseña del   Usuario es requerido',
     },
-
-    'Id_Tarjeta_NFC': {
-      'required': 'El Id de la Tarjeta NFC es requerido',
-      'valorZero': 'El Id de la Tarjeta NFC No Puede ser 0'
-    }
 
   }
 
-  constructor(public fb: FormBuilder, private router : Router,
-    private alertController: AlertController,
-    private usuarioservice:UsuarioService) {
-    this.usuario=this.usuarioservice.getUsuario();
-    console.log('Correo: ', this.usuario.Correo);
-    console.log('Nombre: ', this.usuario.Nombre);
-    this.formularioRegistro = this.fb.group({
-      Nombre: ["", [Validators.required] ],
-      Apelllido : ["", [Validators.required]],
-      Correo : [this.usuario.Correo, [Validators.required]],
-      Telefono : [this.usuario.Telefono, [Validators.required]],
-      CUI : [this.usuario.CUI, [Validators.required]],
-      Contraseña : ["",[Validators.required] ],
-      ConfirmarContraseña : ["", [Validators.required]]
-    });
-    this.formularioRegistro.valueChanges
-      .subscribe(data => this.onValueChanged(data));
+  public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const valor = control.value;
+        //console.log('Valor obtenido en el validador: '+valor);
+        if(valor===0){
+          return {valorZero:{value: control.value}};
+        }
+      return null;
+  };
 
-    this.formularioRegistro
+  constructor(public fb: FormBuilder, private router : Router,
+    public alertController: AlertController) {
+      this.createForm();
+
+
+
+
+  }
+  createForm(): void {
+  this.formularioRegistro = this.fb.group({
+    Nombre: ["", [Validators.required] ],
+    Apelllido : ["", [Validators.required]],
+    Correo : [this.usuario.Correo, [Validators.required]],
+    Telefono : [this.usuario.Telefono, [Validators.required]],
+    CUI : [this.usuario.CUI, [Validators.required]],
+    Contraseña : ["",[Validators.required] ],
+    ConfirmarContraseña : ["", [Validators.required]]
+  });
+
+  this.formularioRegistro.valueChanges
+  .subscribe(data => this.onValueChanged(data));
+
+  this.onValueChanged(); //Resetear los mensajes de validacion
     console.log(this.formularioRegistro.value)
     /*this.formularioRegistro.patchValue(
       {
@@ -90,13 +111,13 @@ export class RegistrarUPage implements OnInit {
     )*/
     console.log(this.formularioRegistro.value)
 
-
-
-
   }
 
-  ngOnInit() {
-  }
+
+ngOnInit() {  }
+
+
+
 
   onValueChanged(data?: any): void {
     if (!this.formularioRegistro) {

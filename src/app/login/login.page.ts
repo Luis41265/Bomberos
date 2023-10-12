@@ -32,6 +32,7 @@ export class LoginPage /*implements OnInit*/ {
     Correo: "",
     TokenActual:"",
     Estado:true,
+
   }
 
     loginForm: FormGroup;
@@ -108,6 +109,7 @@ export class LoginPage /*implements OnInit*/ {
     await alert.present();
   }
 
+
   async Alert(header:string, subheader:string) {
     const alert = await this.alertController.create({
       header: header,
@@ -151,6 +153,7 @@ export class LoginPage /*implements OnInit*/ {
       // @ts-ignore
       window.onGoogleLibraryLoad = () => {
         console.log('Google\'s One-tap sign in script loaded!');
+
         // @ts-ignore
         google.accounts.id.initialize({
           // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
@@ -159,7 +162,9 @@ export class LoginPage /*implements OnInit*/ {
           cancel_on_tap_outside: false,
           context:'use'
         });
+
         console.log('Termino de cargar el cliente de google' )
+
       };
     }*/
 
