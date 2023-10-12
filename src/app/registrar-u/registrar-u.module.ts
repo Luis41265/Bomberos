@@ -14,8 +14,9 @@ import { RegistrarUPage } from './registrar-u.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistrarUPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RegistrarUPageRoutingModule
+
   ],
   declarations: [RegistrarUPage]
 })

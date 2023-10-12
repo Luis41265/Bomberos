@@ -12,9 +12,22 @@ export class UsuarioService {
 
   private url:string="usuario";
   private urlLogin:string="login";
+  private urlLoginGoogle:string="login/google";
   private urlVerify:string=this.url+"/verify";
   private urldelete:string="/delete";
-  private usuario:Usuario;
+  private usuario : Usuario = {
+    Id_Usuario:0,
+    Id_Rol:0,
+    Id_Subestacion: 0,
+    Usuario:"",
+    Contraseña: "",
+    Nombre:"",
+    CUI:"",
+    Telefono: '',
+    Correo: "",
+    TokenActual:"",
+    Estado:true,
+  };
 
 
   constructor(private apirest:ApirestService, private alertController:AlertController,
@@ -41,11 +54,15 @@ export class UsuarioService {
   }
 
 
-  getUsuario():Usuario{
+  public getUsuario():Usuario{
     return this.usuario;
   }
 
-  update(Usuario:Usuario):void{
+  public setUsuario(usuario:Usuario){
+    this.usuario=usuario;
+  }
+
+  public update(Usuario:Usuario):void{
     this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     this.apirest.post<Usuario>(this.url, Usuario).subscribe(result=>{
         console.log("Resultado de guardar Usuario: ");
@@ -62,35 +79,12 @@ export class UsuarioService {
       });
   }
 
-  async verify(Usuario:Usuario):Promise<boolean>{
-
-    /*await this.apirest.post<Usuario>(this.urlVerify, Usuario).subscribe(result=>{
-        console.log("Resultado de Verificar al Usuario: ");
-        console.log(result);
-        this.usuario=result;
-        return result.Estado;
-      },
-      error => {
-        // Puedes pasarle el err en caso de que mandes el mensaje desde el
-        console.log('Sucedio un error al Loguear Usuario');
-        console.log(error);
-        return false;
-      });*/
+  public async verify(Usuario:Usuario):Promise<boolean>{
     let result=false;
-
-    /*await this.apirest.post<Usuario>(this.urlVerify, Usuario).toPromise().then(usuario=>{
-      console.log('Usuario obtenido de la verificación: ', usuario)
-      result= usuario.Estado;
-    }).catch(err=>{
-        console.log("Error capturado al consumir el servicio GET");
-        console.log(err.json);
-      result= false;
-    });*/
-    //return result;
     return await this.apirest.post<Usuario>(this.urlVerify, Usuario).pipe(map(usuario=>{return usuario.Estado})).toPromise();
   }
 
-  login(Usuario:Usuario):void{
+  public login(Usuario:Usuario):void{
     this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     this.apirest.post<Usuario>(this.urlLogin, Usuario).subscribe(result=>{
         console.log("Resultado de Logear al Usuario: ");
@@ -109,7 +103,26 @@ export class UsuarioService {
       });
   }
 
-  save(Usuario:Usuario):void{
+  public loginGoogle(Usuario:Usuario):void{
+    this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
+    this.apirest.post<Usuario>(this.urlLoginGoogle, Usuario).subscribe(result=>{
+        console.log("Resultado de Logear al Usuario Por medio de Google: ");
+        console.log(result);
+        this.usuario=result;
+        this.apirest.setToken(result.TokenActual);
+        //this.detallesequiposemergencias.push(result);
+        this.Alert('Bienvenido', 'En que Podemos Apoyarte???');
+        this.router.navigate(['/menu']);
+      },
+      error => {
+        // Puedes pasarle el err en caso de que mandes el mensaje desde el
+        console.log('Sucedio un error al Loguear Usuario');
+        console.log(error);
+        this.AlertError('Usuario No ha sido autenticado exitosamente', 'Vuelva a Intentarlo Por favor!!!');
+      });
+  }
+
+  public save(Usuario:Usuario):void{
     this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     this.apirest.put<Usuario>(this.url, Usuario).subscribe(result=>{
         console.log("Resultado de actualizar Usuario: ");
@@ -130,7 +143,7 @@ export class UsuarioService {
       });
   }
 
-  delete(Usuario:Usuario):void{
+  public delete(Usuario:Usuario):void{
     this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
     let urlDelete=this.url+this.urldelete;
     this.apirest.delete<Usuario>(urlDelete, Usuario).subscribe(result=>{

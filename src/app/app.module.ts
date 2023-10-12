@@ -18,11 +18,12 @@ import {RolService} from "./services/rol.service";
 import {SubestacionService} from "./services/subestacion.service";
 import {TipoemergenciaService} from "./services/tipoemergencia.service";
 import {UsuarioService} from "./services/usuario.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HTTP_INTERCEPTORS,

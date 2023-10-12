@@ -18,7 +18,7 @@ import {UsuarioService} from "../services/usuario.service";
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage /*implements OnInit*/ {
 
   usuario : Usuario = {
     Id_Usuario:0,
@@ -32,7 +32,6 @@ export class LoginPage implements OnInit {
     Correo: "",
     TokenActual:"",
     Estado:true,
-
   }
 
     loginForm: FormGroup;
@@ -46,6 +45,7 @@ export class LoginPage implements OnInit {
     private apirest: ApirestService,
                 private usuarioservice:UsuarioService
     ) {
+    this.initGoogle();
 
     this.loginForm = this.fb.group({
     //loginForm = new FormGroup({
@@ -108,7 +108,6 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-
   async Alert(header:string, subheader:string) {
     const alert = await this.alertController.create({
       header: header,
@@ -129,22 +128,15 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-
-
    iniciarSesionOAuth(){
      const proveedorOAuth = 'https://google-oauth.com/authorize';
      const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
      const redirectURI = 'https://accounts.google.com';
      const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
 
-
-
-
    }
 
    Registrarse() {
-
-
 
    }
 
@@ -155,11 +147,10 @@ export class LoginPage implements OnInit {
   });
   }
 
-    ngOnInit() {
+    /*ngOnInit() {
       // @ts-ignore
       window.onGoogleLibraryLoad = () => {
         console.log('Google\'s One-tap sign in script loaded!');
-
         // @ts-ignore
         google.accounts.id.initialize({
           // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
@@ -168,11 +159,25 @@ export class LoginPage implements OnInit {
           cancel_on_tap_outside: false,
           context:'use'
         });
-
         console.log('Termino de cargar el cliente de google' )
-
       };
-    }
+    }*/
+
+  initGoogle(){
+    const thisClass = this;
+    // @ts-ignore
+      console.log('Google\'s One-tap sign in script loaded!');
+      // @ts-ignore
+      google.accounts.id.initialize({
+        // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
+        client_id: '845227166117-d6nopp7mpmeots7qne3tji8lbaecuo2a.apps.googleusercontent.com',
+        callback: (response: CredentialResponse) => { thisClass.handleCredentialResponse(response) },
+        //callback: this.handleCredentialResponse, // Whatever function you want to trigger...
+        cancel_on_tap_outside: false,
+        context:'use'
+      });
+      console.log('Termino de cargar el cliente de google' );
+  }
 
     loginGoogle(){
       // @ts-ignore
@@ -189,16 +194,47 @@ export class LoginPage implements OnInit {
         console.error('Error while trying to decode token', e);
       }
       console.log('decodedToken', decodedToken);
-      this.usuario.Correo=decodedToken.email;
-      this.usuario.Nombre=decodedToken.name;
-      let usuarioExist=false;
-      usuarioExist=await this.usuarioservice.verify(this.usuario);
-      if(usuarioExist){
+      const email:string=decodedToken.email;
+      const name:string=decodedToken.name;
+      console.log('Correo: ', email);
+      console.log('Nombre: ', name);
 
+
+      this.usuario.Correo=email;
+      this.usuario.Nombre=name;
+      console.log('Correo: ', this.usuario.Correo);
+      console.log('Nombre: ', this.usuario.Nombre);
+      // this.usuarioservice.getUsuario().Correo=email;
+      // this.usuarioservice.getUsuario().Nombre=name;
+      let usuarioExist=false;
+      //usuarioExist=await this.usuarioservice.verify(this.usuario);
+      console.log('Resultado de verificar la existencia del usuario: ', usuarioExist);
+      if(usuarioExist){
+        this.usuarioservice.loginGoogle(this.usuario);
       }else{
+        this.usuarioservice.setUsuario(this.usuario);
         this.router.navigate(['/registrar-u']);
       }
 
+    }
+
+    async verifyGoogle(email:string, name:string){
+      console.log('Correo: ', this.usuario.Correo);
+      console.log('Nombre: ', this.usuario.Nombre);
+
+      this.usuario.Correo=email;
+      this.usuario.Nombre=name;
+      // this.usuarioservice.getUsuario().Correo=email;
+      // this.usuarioservice.getUsuario().Nombre=name;
+      let usuarioExist=false;
+      //usuarioExist=await this.usuarioservice.verify(this.usuario);
+      console.log('Resultado de verificar la existencia del usuario: ', usuarioExist);
+      if(usuarioExist){
+        this.usuarioservice.loginGoogle(this.usuario);
+      }else{
+        this.usuarioservice.setUsuario(this.usuario);
+        this.router.navigate(['/registrar-u']);
+      }
     }
 
 

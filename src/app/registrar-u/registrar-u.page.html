@@ -17,12 +17,12 @@
 
 
   <form [formGroup]= "formularioRegistro" >
-    <ion-item button>
+    <ion-item>
       <ion-input
         autofocus="true"
         type="text"
         placeholder="Nombre..."
-        FormControlName="nombre"
+        FormControlName="Nombre"
       >
       </ion-input>
     </ion-item>
@@ -32,7 +32,7 @@
         autofocus="true"
         type="text"
         placeholder="Apelllido"
-        FormControlName="apellido"
+        FormControlName="Apelllido"
       >
       </ion-input>
     </ion-item>
@@ -42,7 +42,8 @@
         autofocus="true"
         type="email"
         placeholder="Correo"
-        FormControlName="correo"
+        FormControlName="Correo"
+        [value]="formularioRegistro.controls['Correo'].value"
       >
       </ion-input>
     </ion-item>
@@ -54,7 +55,8 @@
         min = "8"
         max = "8"
         placeholder="Telefono"
-        FormControlName="telefono"
+        FormControlName="Telefono"
+
       >
       </ion-input>
     </ion-item>
@@ -63,7 +65,7 @@
         autofocus="true"
         type="number"
         placeholder="CUI"
-        FormControlName="cui"
+        FormControlName="CUI"
       >
       </ion-input>
     </ion-item>
@@ -74,7 +76,7 @@
         type="text"
         placeholder="Contraseña"
         type="password"
-        FormControlName="password"
+        FormControlName="Contraseña"
       >
       </ion-input>
     </ion-item>
@@ -83,9 +85,9 @@
       <ion-input
         autofocus="true"
         type="text"
-        placeholder="Confirmar Contraseña"
+        placeholder="ConfirmarContraseña"
         type="password"
-        FormControlName="confirmarcontraseña"
+        FormControlName="ConfirmarContraseña"
       >
       </ion-input>
     </ion-item>
@@ -93,7 +95,7 @@
 
 
 
-    <ion-button color="medium" (click) = "guardar()"> Registrarse </ion-button>
+    <ion-button color="medium" (click) = "guardar()" [disabled]="formularioRegistro.invalid"> Registrarse </ion-button>
 
   </form>
 </ion-header>
