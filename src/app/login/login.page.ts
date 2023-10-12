@@ -131,16 +131,16 @@ export class LoginPage implements OnInit {
 
 
 
-   iniciarSesionOAuth(){
-     const proveedorOAuth = 'https://google-oauth.com/authorize';
-     const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
-     const redirectURI = 'https://accounts.google.com';
-     const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
+  //  iniciarSesionOAuth(){
+  //    const proveedorOAuth = 'https://google-oauth.com/authorize';
+  //    const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
+  //    const redirectURI = 'https://accounts.google.com';
+  //    const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
 
 
 
 
-   }
+  //  }
 
    Registrarse() {
 

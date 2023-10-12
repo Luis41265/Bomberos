@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild} from '@angular/core';
 import {  CameraResultType, CameraSource } from '@capacitor/camera';
 import {EmergenciaService} from '../services/emergencia.service' ;
+import { AlertController } from '@ionic/angular';
 
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,7 +33,7 @@ export class SolicitarEmergenciaPage implements OnInit {
   };
 
 
-  emergencyForm = FormGroup;
+  emergencyForm : FormGroup;
 
   formErrors={
     'Id_Emergencia' : " ",
@@ -72,14 +73,69 @@ export class SolicitarEmergenciaPage implements OnInit {
 
   };
 
+  @ViewChild('fform') registroFormDirective:any;
+
+  public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const valor = control.value;
+        //console.log('Valor obtenido en el validador: '+valor);
+        if(valor===0){
+          return {valorZero:{value: control.value}};
+        }
+      return null;
+  };
+
   constructor( private emergenciaService: EmergenciaService,
     private formBuilder: FormBuilder,
-    private router : Router) { }
+    private router : Router
+    ,private alertController:AlertController,
+    public fb: FormBuilder) { }
 
-  ngOnInit() {
+
+
+  ngOnInit() {  }
+
+  createForm(): void {
+    this.emergencyForm=this.fb.group({
+      Id_Usuario: [0, [Validators.required, this.valorZero]],
+      Id_Tipo_Emergencia: [0, [Validators.required, this.valorZero]],
+      Departamento: ['', [Validators.required]],
+      Municipio: ['', [Validators.required, this.valorZero]],
+      Descripcion_Lugar: ['', [Validators.required, this.valorZero]],
+      Cantidad_Personas_Afectadas: [0, [Validators.required, this.valorZero]],
+      Descripcion_Emergencia: ['',[Validators.required,this.valorZero]],
+      Estado: ['',[Validators.required,this.valorZero]]
+    });
+
+    this.emergencyForm.valueChanges
+    .subscribe(data => this.onValueChanged(data));
+
+    this.onValueChanged(); //Resetear los mensajes de validacion
 
   }
 
+    onValueChanged(data?:any):void{
+      if(!this.emergencyForm){
+        return;
+
+      }
+      const form = this.emergencyForm;
+
+  for (const field in this.formErrors) {
+    if (this.formErrors.hasOwnProperty(field)) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          if (control.errors.hasOwnProperty(key)) {
+            this.formErrors[field] += messages[key] + ' ';
+          }
+        }
+      }
+    }
+  }
+}
   enviarSolicitud(){
 
   }
