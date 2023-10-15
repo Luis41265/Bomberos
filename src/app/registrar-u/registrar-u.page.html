@@ -16,86 +16,102 @@
   </ion-toolbar>
 
 
-  <form [formGroup]="formularioRegistro">
-    <ion-item>
-      <ion-input
-        FormControlName="Nombre"
-        autofocus="true"
-        placeholder="Nombre..."
-        type="text"
-      >
-      </ion-input>
-    </ion-item>
+  <form #fform="ngForm" (ngSubmit)="registrarUsuario()" [formGroup]="formularioRegistro">
+    <ion-list>
+      <ion-item>
+        <ion-input
+          formControlName="given_name"
+          placeholder="Nombre..."
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.given_name">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.given_name}} </ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-input
-        FormControlName="Apelllido"
-        autofocus="true"
-        placeholder="Apelllido"
-        type="text"
-      >
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="family_name"
+          placeholder="Apelllido"
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.family_name">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.family_name}} </ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-input
-        FormControlName="Correo"
-        [value]="formularioRegistro.controls['Correo'].value"
-        autofocus="true"
-        placeholder="Correo"
-        type="email"
-      >
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="Correo"
+          placeholder="Correo"
+          type="email"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.Correo">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Correo}} </ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-input
-        FormControlName="Telefono"
-        autofocus="true"
-        max="8"
-        min="8"
-        placeholder="Telefono"
-        type="number"
+      <ion-item>
+        <ion-input
+          formControlName="Telefono"
+          placeholder="Telefono"
+          type="text"
 
-      >
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input
-        FormControlName="CUI"
-        autofocus="true"
-        placeholder="CUI"
-        type="number"
-      >
-      </ion-input>
-    </ion-item>
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.Telefono">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Telefono}} </ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-input
-        FormControlName="Contraseña"
-        autofocus="true"
-        placeholder="Contraseña"
-        type="password"
-        type="text"
-      >
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="CUI"
+          placeholder="CUI"
+          type="number"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.CUI">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.CUI}} </ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-input
-        FormControlName="ConfirmarContraseña"
-        autofocus="true"
-        placeholder="ConfirmarContraseña"
-        type="password"
-        type="text"
-      >
-      </ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input
+          formControlName="Contrasenia"
+          placeholder="Contraseña"
+          type="password"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.Contrasenia">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Contrasenia}} </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-input
+          formControlName="ConfirmarContrasenia"
+          placeholder="ConfirmarContraseña"
+          type="password"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.ConfirmarContrasenia">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.ConfirmarContrasenia}} </ion-label>
+      </ion-item>
+    </ion-list>
 
 
-    <ion-button (click)="guardar()" [disabled]="formularioRegistro.invalid" color="medium"> Registrarse</ion-button>
+    <ion-button color="danger" type="submit"> Registrarse
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+    </ion-button>
 
   </form>
+
+
 </ion-header>
 
 

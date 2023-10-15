@@ -19,7 +19,7 @@ export class ApirestService {
   };
 
 
-  private token: string;
+  private token: string = "";
 
   /**
    * Url base del servidor donde se encuentran nuestros endpoints
@@ -146,6 +146,7 @@ export class ApirestService {
     url = this.url + url;
     console.log("Url: " + url);
     console.log("Entidad: " + JSON.stringify(entidad));
+    console.log(entidad);
     if (this.platform.is('hybrid')) {
       const options = {
         url: url,
@@ -153,6 +154,7 @@ export class ApirestService {
           'Content-Type': 'application/json',
           'Authorization': this.getAuthorizationToken()
         },
+        //data: entidad,
         data: entidad,
       };
 
@@ -175,7 +177,7 @@ export class ApirestService {
         }));
 
     } else {
-      return this.http.put<T>(url, entidad, this.httpOptions).pipe(
+      /*return this.http.put<T>(url, entidad, this.httpOptions).pipe(
         catchError(err => {
             // onError
             console.log("Error capturado al consumir el servicio PUT");
@@ -183,7 +185,8 @@ export class ApirestService {
             return throwError(err);
           }
         )
-      );
+      );*/
+      return this.http.put<T>(url, entidad, this.httpOptions);
     }
   }
 

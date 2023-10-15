@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {Usuario} from "../Entidades/Usuario";
+import {UsuarioService} from "../services/usuario.service";
 
 @Component({
   selector: 'app-registrar-u',
@@ -13,10 +14,12 @@ export class RegistrarUPage implements OnInit {
 
   formularioRegistro: FormGroup;
 
+  @ViewChild('fform') materialFormDirective: any;
+
   usuario: Usuario = {
     Id_Usuario: 0,
-    Id_Rol: 0,
-    Id_Subestacion: 0,
+    Id_Rol: 1,
+    Id_Subestacion: 1,
     Usuario: "",
     Contraseña: "",
     Nombre: "",
@@ -28,80 +31,91 @@ export class RegistrarUPage implements OnInit {
   }
 
   formErrors = {
-    'nombre': "",
-    'apellido': "",
-    'correo': "",
-    'telefono': "",
-    'cui': "",
-    'contraseña': "",
-    'confirmarcontraseña': ""
+    'given_name': "",
+    'family_name': "",
+    'Correo': "",
+    'Telefono': "",
+    'CUI': "",
+    'Contrasenia': "",
+    'ConfirmarContrasenia': ""
   };
 
   validationMessages = {
-    'nombre': {
+    'given_name': {
       'required': 'El Nombre del Usuario es requerido',
     },
-    'apellido': {
+    'family_name': {
       'required': 'El Apellido del Usuario es requerido',
     },
-    'correo': {
+    'Correo': {
       'required': 'El Correo del Usuario es requerido',
+      'email': 'Ingrese un correo valido por favor'
     },
-    'cui': {
-      'required': 'El Cui del  Usuario es requerido',
-      ' valorZero': 'El numero de CUI no puede ser 0'
+    'Telefono': {
+      'required': 'El Telefono del Usuario es requerido'
+    },
+    'CUI': {
+      'required': 'El Cui del  Usuario es requerido'
     },
 
-    'contraseña': {
+    'Contrasenia': {
       'required': 'La contraseña del Usuario es requerido',
     },
 
-    'confirmarcontraseña': {
+    'ConfirmarContrasenia': {
       'required': 'La confirmacion de contraseña del Usuario es requerido',
     },
 
   }
 
-  constructor(public fb: FormBuilder, private router: Router,
-              public alertController: AlertController) {
+  constructor(private fb: FormBuilder, private router: Router,
+              private alertController: AlertController, private usuarioservice: UsuarioService) {
+    this.usuario = this.usuarioservice.getUsuario();
     this.createForm();
-
   }
 
-  public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const valor = control.value;
-    //console.log('Valor obtenido en el validador: '+valor);
-    if (valor === 0) {
-      return {valorZero: {value: control.value}};
-    }
-    return null;
-  };
+  ngOnInit() {
+    console.log("Formulario, ", this.formularioRegistro)
+    this.formularioRegistro.valueChanges.pipe().subscribe(
+      data => {
+        //console.log("Data que validara el formulario: ", data);
+        this.onValueChanged(data);
+      }
+    );
+    console.log("Formulario, ", this.formularioRegistro)
+    console.log('Ha Suscrito el formulario')
+  }
 
   createForm(): void {
     this.formularioRegistro = this.fb.group({
-      Nombre: ["", [Validators.required]],
-      Apelllido: ["", [Validators.required]],
-      Correo: [this.usuario.Correo, [Validators.required]],
+      given_name: [this.usuario.given_name, [Validators.required]],
+      family_name: [this.usuario.family_name, [Validators.required]],
+      Correo: [this.usuario.Correo, [Validators.required, Validators.email]],
       Telefono: [this.usuario.Telefono, [Validators.required]],
       CUI: [this.usuario.CUI, [Validators.required]],
-      Contraseña: ["", [Validators.required]],
-      ConfirmarContraseña: ["", [Validators.required]]
+      Contrasenia: ['', [Validators.required]],
+      ConfirmarContrasenia: ['', [Validators.required]]
     });
-
-    this.formularioRegistro.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged(); //Resetear los mensajes de validacion
-    console.log(this.formularioRegistro.value)
+    console.log('Ha creado el formulario')
 
   }
 
-
-  ngOnInit() {
+  resetearForm(): void {
+    this.formularioRegistro.reset({
+      Nombre: '',
+      Apelllido: '',
+      Correo: '',
+      Telefono: '',
+      CUI: '',
+      Contrasenia: '',
+      ConfirmarContrasenia: '',
+    });
+    this.materialFormDirective.resetForm();
   }
 
 
   onValueChanged(data?: any): void {
+    //console.log('Data recibida', data)
     if (!this.formularioRegistro) {
       return;
     }
@@ -125,18 +139,20 @@ export class RegistrarUPage implements OnInit {
 
   }
 
-  async guardar() {
-    var f = this.formularioRegistro.value;
-    if (this.formularioRegistro.invalid) {
-      const alert = await this.alertController.create({
-        header: 'Datos Incompletos',
-        message: 'Campos Incompletos',
-        buttons: ['Aceptar']
 
-      });
-      await alert.present();
-      return;
-    }
+  async registrarUsuario() {
+    const f = this.formularioRegistro.value;
+    console.log("Formulario a enviar: ", f);
+
+    this.usuario = this.formularioRegistro.value;
+    this.usuario.Id_Rol = 1;
+    this.usuario.Id_Subestacion = 1;
+    this.usuario.Nombre = this.usuario.given_name + ' ' + this.usuario.family_name;
+    this.usuario.Usuario = this.usuario.Nombre;
+    this.usuario.Contraseña = this.usuario.Contrasenia;
+    console.log('Usuario a registrar: ', this.usuario);
+    this.usuarioservice.save(this.usuario);
+
 
   }
 }

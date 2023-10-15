@@ -14,12 +14,12 @@ import {UsuarioService} from "../services/usuario.service";
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage /*implements OnInit*/ {
+export class LoginPage {
 
   usuario: Usuario = {
     Id_Usuario: 0,
-    Id_Rol: 0,
-    Id_Subestacion: 0,
+    Id_Rol: 1,
+    Id_Subestacion: 1,
     Usuario: "",
     Contraseña: "",
     Nombre: "",
@@ -34,7 +34,6 @@ export class LoginPage /*implements OnInit*/ {
   loginForm: FormGroup;
   username: string = '1';
   password: string = '1';
-
 
   constructor(public fb: FormBuilder,
               private router: Router,
@@ -146,24 +145,6 @@ export class LoginPage /*implements OnInit*/ {
     });
   }
 
-  /*ngOnInit() {
-    // @ts-ignore
-    window.onGoogleLibraryLoad = () => {
-      console.log('Google\'s One-tap sign in script loaded!');
-
-      // @ts-ignore
-      google.accounts.id.initialize({
-        // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
-        client_id: '845227166117-d6nopp7mpmeots7qne3tji8lbaecuo2a.apps.googleusercontent.com',
-        callback: this.handleCredentialResponse, // Whatever function you want to trigger...
-        cancel_on_tap_outside: false,
-        context:'use'
-      });
-
-      console.log('Termino de cargar el cliente de google' )
-
-    };
-  }*/
 
   initGoogle() {
     const thisClass = this;
@@ -200,12 +181,15 @@ export class LoginPage /*implements OnInit*/ {
     console.log('decodedToken', decodedToken);
     const email: string = decodedToken.email;
     const name: string = decodedToken.name;
+    const family_name: string = decodedToken.family_name;
+    const given_name: string = decodedToken.given_name;
     console.log('Correo: ', email);
     console.log('Nombre: ', name);
 
-
     this.usuario.Correo = email;
     this.usuario.Nombre = name;
+    this.usuario.given_name = given_name;
+    this.usuario.family_name = family_name;
     console.log('Correo: ', this.usuario.Correo);
     console.log('Nombre: ', this.usuario.Nombre);
     // this.usuarioservice.getUsuario().Correo=email;
@@ -230,8 +214,8 @@ export class LoginPage /*implements OnInit*/ {
     this.usuario.Nombre = name;
     // this.usuarioservice.getUsuario().Correo=email;
     // this.usuarioservice.getUsuario().Nombre=name;
-    let usuarioExist = false;
-    //usuarioExist=await this.usuarioservice.verify(this.usuario);
+    //let usuarioExist = false;
+    let usuarioExist = await this.usuarioservice.verify(this.usuario);
     console.log('Resultado de verificar la existencia del usuario: ', usuarioExist);
     if (usuarioExist) {
       this.usuarioservice.loginGoogle(this.usuario);

@@ -18,8 +18,8 @@ export class UsuarioService {
   private urldelete: string = "/delete";
   private usuario: Usuario = {
     Id_Usuario: 0,
-    Id_Rol: 0,
-    Id_Subestacion: 0,
+    Id_Rol: 1,
+    Id_Subestacion: 1,
     Usuario: "",
     Contraseña: "",
     Nombre: "",
@@ -67,7 +67,7 @@ export class UsuarioService {
   public update(Usuario: Usuario): void {
     this.usuario.Contraseña = Md5.hashStr(this.usuario.Contraseña);
     this.apirest.post<Usuario>(this.url, Usuario).subscribe(result => {
-        console.log("Resultado de guardar Usuario: ");
+        console.log("Resultado de actualizar Usuario: ");
         console.log(result);
         //this.detallesequiposemergencias.push(result);
         this.Alert('Usuario ha sido creado exitosamente', '');
@@ -129,21 +129,39 @@ export class UsuarioService {
   public save(Usuario: Usuario): void {
     this.usuario.Contraseña = Md5.hashStr(this.usuario.Contraseña);
     this.apirest.put<Usuario>(this.url, Usuario).subscribe(result => {
-        console.log("Resultado de actualizar Usuario: ");
+        console.log("Resultado de crear el Usuario: ");
         console.log(result);
         /*this.detallesequiposemergencias.forEach(temp=>{
           if(temp.Id_Equipo===result.Id_Equipo){
             temp=result;
           }
         });*/
-        this.Alert('Usuario ha sido actualizado exitosamente', '');
+        this.Alert('Usuario ha sido registrado exitosamente', '');
         this.router.navigate(['/menu']);
       },
       error => {
         // Puedes pasarle el err en caso de que mandes el mensaje desde el
-        console.log('Sucedio un error al actualizar Usuario');
+        console.log('Sucedio un error al registrar Usuario');
         console.log(error);
-        this.AlertError('Usuario No ha sido actualizada exitosamente', 'Vuelva a Intentarlo Por favor!!!');
+        this.AlertError('Usuario No ha sido registrado exitosamente', 'Vuelva a Intentarlo Por favor!!!');
+      });
+  }
+
+  public saveLogging(Usuario: Usuario): void {
+    this.usuario.Contraseña = Md5.hashStr(this.usuario.Contraseña);
+    this.apirest.put<Usuario>(this.url, Usuario).subscribe(result => {
+        console.log("Resultado de crear el Usuario: ");
+        console.log(result);
+        this.usuario = result;
+
+        this.Alert('Usuario ha sido registrado exitosamente', '');
+        this.router.navigate(['/login']);
+      },
+      error => {
+        // Puedes pasarle el err en caso de que mandes el mensaje desde el
+        console.log('Sucedio un error al registrar Usuario');
+        console.log(error);
+        this.AlertError('Usuario No ha sido registrado exitosamente', 'Vuelva a Intentarlo Por favor!!!');
       });
   }
 
