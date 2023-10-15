@@ -102,8 +102,8 @@ export class RegistrarUPage implements OnInit {
 
   resetearForm(): void {
     this.formularioRegistro.reset({
-      Nombre: '',
-      Apelllido: '',
+      given_name: '',
+      family_name: '',
       Correo: '',
       Telefono: '',
       CUI: '',
@@ -143,7 +143,6 @@ export class RegistrarUPage implements OnInit {
   async registrarUsuario() {
     const f = this.formularioRegistro.value;
     console.log("Formulario a enviar: ", f);
-
     this.usuario = this.formularioRegistro.value;
     this.usuario.Id_Rol = 1;
     this.usuario.Id_Subestacion = 1;
@@ -152,6 +151,7 @@ export class RegistrarUPage implements OnInit {
     this.usuario.Contraseña = this.usuario.Contrasenia;
     console.log('Usuario a registrar: ', this.usuario);
     this.usuarioservice.save(this.usuario);
+    this.resetearForm();
 
 
   }
