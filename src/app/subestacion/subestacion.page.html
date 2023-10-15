@@ -7,67 +7,168 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<form  #fform="ngForm" (ngSubmit)="registrarSubestacion()" [formGroup]="formularioSubestacion">
   <ion-list>
+
     <ion-item>
-      <ion-label position="stacked">Nombre</ion-label>
-      <ion-input [(ngModel)]="subestacion.nombre" name="nombre" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Nombre</ion-label>
+      <ion-input [(ngModel)]="subestacion.Nombre" name="nombre" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Nombre"
+      placeholder="Nombre Sur"
+      type="text"
+    >
+    </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Nombre">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Nombre}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Dirección</ion-label>
-      <ion-input [(ngModel)]="subestacion.direccion" name="direccion" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Dirección</ion-label>
+      <ion-input [(ngModel)]="subestacion.Direccion" name="direccion" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Direccion"
+      placeholder="Direccion"
+      type="text"
+    >
+    </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Direccion">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Direccion}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Teléfono</ion-label>
-      <ion-input [(ngModel)]="subestacion.telefono" name="telefono" type="tel"></ion-input>
+      <!-- <ion-label position="stacked">Teléfono</ion-label>
+      <ion-input [(ngModel)]="subestacion.Telefono" name="telefono" type="tel"></ion-input> -->
+      <ion-input
+      formControlName="Telefono"
+      placeholder="Telefono"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Telefono">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Telefono}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Correo Institucional</ion-label>
-      <ion-input [(ngModel)]="subestacion.correoInstitucional" name="correoInstitucional" type="email"></ion-input>
+      <!-- <ion-label position="stacked">Correo Institucional</ion-label>
+      <ion-input [(ngModel)]="subestacion.Correo_Insitucional" name="correoInstitucional" type="email"></ion-input> -->
+      <ion-input
+      formControlName="Correo_Insitucional"
+      placeholder="Correo Insitucional"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Correo_Insitucional">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Correo_Insitucional}} </ion-label>
+    </ion-item>
+
+
+    <ion-item>
+      <!-- <ion-label position="stacked">Departamento</ion-label>
+      <ion-input [(ngModel)]="subestacion.Departamento" name="departamento" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Departamento"
+      placeholder="Departamento"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Departamento">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Departamento}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Departamento</ion-label>
-      <ion-input [(ngModel)]="subestacion.departamento" name="departamento" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Municipio</ion-label>
+      <ion-input [(ngModel)]="subestacion.Municipio" name="municipio" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Municipio"
+      placeholder="Municipio"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Municipio">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Municipio}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Municipio</ion-label>
-      <ion-input [(ngModel)]="subestacion.municipio" name="municipio" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Alcance Sur</ion-label> -->
+      <!-- <ion-input [(ngModel)]="subestacion.Alcance_Sur" name="alcanceSur" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Alcance_Sur"
+      placeholder="Alcance Sur"
+      type="text"
+    >
+    </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Alcance_Sur">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Alcance_Sur}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Alcance Sur</ion-label>
-      <ion-input [(ngModel)]="subestacion.alcanceSur" name="alcanceSur" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Alcance Norte</ion-label>
+      <ion-input [(ngModel)]="subestacion.Alcance_Norte" name="alcanceNorte" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Alcance_Norte"
+      placeholder="Alcance Norte"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Alcance_Norte">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Alcance_Norte}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Alcance Norte</ion-label>
-      <ion-input [(ngModel)]="subestacion.alcanceNorte" name="alcanceNorte" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Alcance Este</ion-label>
+      <ion-input [(ngModel)]="subestacion.Alcance_Este" name="alcanceEste" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Alcance_Este"
+      placeholder="Alcance Este"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Alcance_Este">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Alcance_Este}} </ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">Alcance Este</ion-label>
-      <ion-input [(ngModel)]="subestacion.alcanceEste" name="alcanceEste" type="text"></ion-input>
+      <!-- <ion-label position="stacked">Alcance Oeste</ion-label>
+      <ion-input [(ngModel)]="subestacion.Alcance_Oeste" name="alcanceOeste" type="text"></ion-input> -->
+      <ion-input
+      formControlName="Alcance_Oeste"
+      placeholder="Alcance Oeste"
+      type="text"
+    >
+   </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Alcance_Oeste">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Alcance_Oeste}} </ion-label>
     </ion-item>
 
-    <ion-item>
-      <ion-label position="stacked">Alcance Oeste</ion-label>
-      <ion-input [(ngModel)]="subestacion.alcanceOeste" name="alcanceOeste" type="text"></ion-input>
-    </ion-item>
 
     <ion-item>
       <ion-label>Estado</ion-label>
-      <ion-select [(ngModel)]="subestacion.estado" name="estado">
+      <ion-select [(ngModel)]="subestacion.Estado" name="estado">
         <ion-select-option value="activo">Activo</ion-select-option>
         <ion-select-option value="inactivo">Inactivo</ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item *ngIf="formErrors.Estado">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Estado}} </ion-label>
+    </ion-item>
+
   </ion-list>
+  <ion-button color="danger" type="submit" [disabled]="formularioSubestacion.invalid"> Guardar
+    <ion-icon name="cloud-upload-outline"></ion-icon>
+  </ion-button>
+</form>
 
-  <ion-button (click)="guardarSubestacion()" expand="full">Guardar Subestación</ion-button>
-</ion-content>
+  <!-- <ion-button (click)="guardarSubestacion()" expand="full">Guardar Subestación</ion-button>
 
+ -->

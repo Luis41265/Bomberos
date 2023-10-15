@@ -7,36 +7,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<form  #fform="ngForm" (ngSubmit)="registrarTipoEmergencia()" [formGroup]="formularioTipoEmergencia">
+<!-- <ion-content class="ion-padding"> -->
   <ion-list>
     <ion-item>
       <ion-label position="floating">Nombre de Emergencia</ion-label>
-      <ion-input [(ngModel)]="emergency.name" name="name" required type="text"></ion-input>
+      <ion-input [(ngModel)]="tipoemergencia.Nombre" name="name" required type="text"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Prioridad</ion-label>
-      <ion-select [(ngModel)]="emergency.priority" name="priority" required>
+      <ion-select [(ngModel)]="tipoemergencia.Prioridad" name="priority" required>
         <ion-select-option value="alta">Alta</ion-select-option>
         <ion-select-option value="media">Media</ion-select-option>
         <ion-select-option value="baja">Baja</ion-select-option>
       </ion-select>
     </ion-item>
 
+    <!-- <ion-item>
+      <ion-label>Color de Emergencia</ion-label>
+      <ion-input [(ngModel)]="tipoemergencia.Color" name="color" type="color"></ion-input>
+    </ion-item> -->
+
     <ion-item>
       <ion-label>Color de Emergencia</ion-label>
-      <ion-input [(ngModel)]="emergency.color" name="color" type="color"></ion-input>
+      <ion-select [(ngModel)]="tipoemergencia.Color" name="color">
+        <ion-select-option value="red">Rojo</ion-select-option>
+        <ion-select-option value="green">Verde</ion-select-option>
+        <ion-select-option value="yellow">Amarillo</ion-select-option>
+        <ion-select-option value="orange">Naranja</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Estado</ion-label>
-      <ion-select [(ngModel)]="emergency.status" name="status" required>
+      <ion-select [(ngModel)]="tipoemergencia.Estado" name="status" required>
         <ion-select-option value="pendiente">Pendiente</ion-select-option>
         <ion-select-option value="en_curso">En Curso</ion-select-option>
         <ion-select-option value="cerrada">Cerrada</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
-
+<!--
   <ion-button (click)="registrartipoEmergencia()" expand="full">Registrar Emergencia</ion-button>
-</ion-content>
+</ion-content> -->
+<ion-button color="danger" type="submit" [disabled]="formularioTipoEmergencia.invalid"> Guardar
+  <ion-icon name="cloud-upload-outline"></ion-icon>
+</ion-button>
+</form>

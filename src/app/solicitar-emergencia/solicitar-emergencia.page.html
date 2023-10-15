@@ -1,72 +1,117 @@
-<ion-header>
+<!-- <ion-header>
   <ion-buttons slot="start">
     <ion-back-button></ion-back-button>
   </ion-buttons>
   <ion-toolbar>
     <ion-title>Solicitar Emergencia</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+<ion-header [translucent]="true">
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
 
-<ion-content class="ion-padding">
-  <ion-list>
-    <ion-item>
+
+
+    <div class="Titulo_1">
+      <h2> Solicitar Emergencia</h2>
+    </div>
+  </ion-toolbar>
+
+<form  #fform="ngForm" (ngSubmit)="registrarEmergencia()" [formGroup]="formularioEmergencia">
+<!-- <ion-content class="ion-padding">
+  <ion-list> -->
+    <!-- <ion-item>
       <ion-label position="floating">Tipo de Emergencia</ion-label>
       <ion-select>
         <ion-select-option value="incendio">Incendio</ion-select-option>
         <ion-select-option value="accidente">Accidente de Tráfico</ion-select-option>
-        <ion-select-option value="rescate">Rescate</ion-select-option>
+        <ion-select-option value="rescate">Rescate</ion-select-option> -->
         <!-- Agrega más opciones de tipos de emergencia aquí -->
-      </ion-select>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Descripción de la Emergencia</ion-label>
-      <ion-input
-        autofocus="true"
-        type="text">
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Descripción de Ubicacion</ion-label>
-      <ion-input
-        autofocus="true"
-        type="text">
-      </ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="stacked">Cantidad personas Afectadas</ion-label>
-      <ion-input
-        autofocus="true"
-        type="numeric">
-      </ion-input>
-    </ion-item>
-
-    <!-- <ion-item>
-      <ion-label position="floating">Ubicación</ion-label>
+      <!-- </ion-select>
     </ion-item> -->
+  <ion-list>
+
+    <ion-item>
+
+      <!-- <ion-label position="stacked">Descripción de la Emergencia</ion-label> -->
+      <ion-input
+      formControlName="Ubicacion"
+      placeholder="Ubicacion..."
+      type="text"
+    >
+    </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Ubicacion">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Ubicacion}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        formControlName="Departamento"
+        placeholder="Departamento..."
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Departamento">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Departamento}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        formControlName="Municipio"
+        placeholder="Municipio..."
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Municipio">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Municipio}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        formControlName="Descripcion_Lugar"
+        placeholder="Descripcon de lugar..."
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Descripcion_Lugar">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Descripcion_Lugar}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        formControlName="Cantidad_Personas_Afectadas"
+        placeholder="Cantidad personas"
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Cantidad_Personas_Afectadas">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Cantidad_Personas_Afectadas}} </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        formControlName="Descripcion_Emergencia"
+        placeholder="Descripicon de Emergencia..."
+        type="text">
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="formErrors.Descripcion_Emergencia">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Descripcion_Emergencia}} </ion-label>
+    </ion-item>
+
   </ion-list>
+  <ion-button color="danger" type="submit" [disabled]="formularioEmergencia.invalid"> Enviar Solicitud
+    <ion-icon name="cloud-upload-outline"></ion-icon>
+  </ion-button>
 
-  <ion-item>
-    <ion-label position="stacked" style="color:black">Municipio</ion-label>
-    <ion-select [(ngModel)]="emergency.municipio" name="municipio">
-      <ion-select-option value="Escuintla">Santa Lucia Cotzumalguapa</ion-select-option>
+    <!-- <ion-button (click)="tomarFoto()" color="medium" expand="full">Tomar Foto</ion-button>
 
-      <!-- Agrega más departamentos según sea necesario -->
-    </ion-select>
-  </ion-item>
+  <ion-button (click)="enviarSolicitud()" color="medium" expand="full">Enviar Solicitud</ion-button> -->
+    <!-- </ion-list>
+</ion-content> -->
+</form>
 
-  <ion-item>
-    <ion-label position="stacked">Departamento</ion-label>
-    <ion-select [(ngModel)]="emergency.departamento" name="departamento">
-      <ion-select-option value="Escuintla">Escuintla</ion-select-option>
-      <ion-select-option value="Guatemala">Guatemala</ion-select-option>
-      <ion-select-option value="San Marcos">San Marcos</ion-select-option>
-      <!-- Agrega más departamentos según sea necesario -->
-    </ion-select>
-  </ion-item>
-  <ion-button (click)="tomarFoto()" color="medium" expand="full">Tomar Foto</ion-button>
-
-  <ion-button (click)="enviarSolicitud()" color="medium" expand="full">Enviar Solicitud</ion-button>
-</ion-content>
+</ion-header>

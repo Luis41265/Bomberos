@@ -14,6 +14,10 @@ import {Emergencia} from '../Entidades/Emergencia';
 })
 export class SolicitarEmergenciaPage implements OnInit {
 
+  formularioEmergencia: FormGroup;
+
+  @ViewChild('fform') materialFormDirective: any;
+
   emergencia: Emergencia = {
     Id_Emergencia: 0,
     Id_Usuario: 0,
@@ -25,32 +29,34 @@ export class SolicitarEmergenciaPage implements OnInit {
     Cantidad_Personas_Afectadas: 0,
     Descripcion_Emergencia: '',
     Estado: true,
-    created_at: '',
-    updated_at: '',
+    // created_at: '',
+    // updated_at: '',
 
   };
 
 
-  emergencyForm: FormGroup;
+
 
   formErrors = {
-    'Id_Emergencia': " ",
-    'Id_Usuario': " ",
-    'Id_Tipo_Emergencia ': " ",
+    // 'Id_Emergencia': " ",
+    // 'Id_Usuario': " ",
+    // 'Id_Tipo_Emergencia ': " ",
     'Ubicacion': " ",
     'Departamento': " ",
     'Municipio': " ",
     'Descripcion_Lugar': " ",
+    'Cantidad_Personas_Afectadas' : "" ,
+    'Descripcion_Emergencia': "",
     'Estado': true,
-    'created_at': " ",
-    'updated_at ': " "
+    // 'created_at': " ",
+    // 'updated_at ': " "
   }
 
   validationMessages = {
-    'Id_Usuario': {
-      'required': 'El Id Usuario es requerido',
-      'valorZero': 'El Id Usuario No Puede ser 0'
-    },
+    // 'Id_Usuario': {
+    //   'required': 'El Id Usuario es requerido',
+    //   'valorZero': 'El Id Usuario No Puede ser 0'
+    // },
 
     'Departamento': {
       'required': 'El Departamento es requerido'
@@ -63,61 +69,85 @@ export class SolicitarEmergenciaPage implements OnInit {
     'Descripcion_Lugar': {
       'required': 'La descripcion del lugar es requerida'
     },
+    'Cantidad_Personas_Afectadas': {
+      'required': 'la cantidad de personas afectadas es requerida'
+    },
+    'Descripcion_Emergencia?: ': {
+      'required': 'la Descripcion  de emergencia es requerida'
+    },
 
   }
-  emergency = {
-    departamento: '',
-    municipio: '',
+  // emergency = {
+  //   departamento: '',
+  //   municipio: '',
 
-  };
+  // };
 
-  @ViewChild('fform') registroFormDirective: any;
+  constructor(private fb: FormBuilder, private router: Router,
+    private alertController: AlertController, private emergenciaservice: EmergenciaService) {
+//this.emergencia = this.emergenciaservice.();
+this.createForm();
+}
 
-  constructor(private emergenciaService: EmergenciaService,
-              private formBuilder: FormBuilder,
-              private router: Router
-    , private alertController: AlertController,
-              public fb: FormBuilder) {
-  }
 
-  public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const valor = control.value;
-    //console.log('Valor obtenido en el validador: '+valor);
-    if (valor === 0) {
-      return {valorZero: {value: control.value}};
-    }
-    return null;
-  };
+
+  // public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  //   const valor = control.value;
+  //   //console.log('Valor obtenido en el validador: '+valor);
+  //   if (valor === 0) {
+  //     return {valorZero: {value: control.value}};
+  //   }
+  //   return null;
+  // };
 
   ngOnInit() {
+    console.log("Formulario, ", this.formularioEmergencia)
+    this.formularioEmergencia.valueChanges.pipe().subscribe(
+      data => {
+        //console.log("Data que validara el formulario: ", data);
+        this.onValueChanged(data);
+      }
+    );
+    console.log("Formulario, ", this.formularioEmergencia)
+    console.log('Ha Suscrito el formulario')
   }
 
   createForm(): void {
-    this.emergencyForm = this.fb.group({
-      Id_Usuario: [0, [Validators.required, this.valorZero]],
-      Id_Tipo_Emergencia: [0, [Validators.required, this.valorZero]],
-      Departamento: ['', [Validators.required]],
-      Municipio: ['', [Validators.required, this.valorZero]],
-      Descripcion_Lugar: ['', [Validators.required, this.valorZero]],
-      Cantidad_Personas_Afectadas: [0, [Validators.required, this.valorZero]],
-      Descripcion_Emergencia: ['', [Validators.required, this.valorZero]],
-      Estado: ['', [Validators.required, this.valorZero]]
+    this.formularioEmergencia = this.fb.group({
+      Ubicacion: [this.emergencia.Ubicacion, [Validators.required]],
+      Departamento: [this.emergencia.Departamento, [Validators.required]],
+      Municipio: [this.emergencia.Municipio, [Validators.required, Validators.email]],
+      Descripcion_Lugar: [this.emergencia.Descripcion_Lugar, [Validators.required]],
+      Descripcion_Emergencia: [this.emergencia.Descripcion_Emergencia, [Validators.required]],
+      Cantidad_Personas_Afectadas:  [this.emergencia.Cantidad_Personas_Afectadas, [Validators.required]],
+    //  Estado : [this.emergencia.Estado, [Validators.required]]
+
     });
-
-    this.emergencyForm.valueChanges
-      .subscribe(data => this.onValueChanged(data));
-
-    this.onValueChanged(); //Resetear los mensajes de validacion
+    console.log('Ha creado el formulario')
 
   }
 
+  resetearForm(): void {
+    this.formularioEmergencia.reset({
+      Ubicacion: '',
+      Departamento: '',
+      Municipio: '',
+      Descripcion_Lugar: '',
+      Descripcion_Emergencia: '',
+      Cantidad_Personas_Afectadas: '',
+
+    });
+    this.materialFormDirective.resetForm();
+  }
+
+
   onValueChanged(data?: any): void {
-    if (!this.emergencyForm) {
+    //console.log('Data recibida', data)
+    if (!this.formularioEmergencia) {
       return;
-
     }
-    const form = this.emergencyForm;
 
+    const form = this.formularioEmergencia;
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previous error message (if any)
@@ -133,14 +163,28 @@ export class SolicitarEmergenciaPage implements OnInit {
         }
       }
     }
-  }
-
-  enviarSolicitud() {
 
   }
 
-  async tomarFoto() {
+
+  async registrarEmergencia() {
+    const f = this.formularioEmergencia.value;
+    console.log("Formulario a enviar: ", f);
+    this.emergencia = this.formularioEmergencia.value;
+    this.emergencia.Id_Emergencia = 1;
+    this.emergencia.Id_Usuario = 1;
+    this.emergencia.Id_Tipo_Emergencia = 1;
+    this.emergencia.Ubicacion = this.emergencia.Ubicacion;
+    this.emergencia.Departamento = this.emergencia.Departamento;
+    this.emergencia.Municipio = this.emergencia.Municipio;
+    this.emergencia.Descripcion_Emergencia = this.emergencia.Descripcion_Emergencia;
+    this.emergencia.Descripcion_Lugar = this.emergencia.Descripcion_Lugar;
+    this.emergencia.Cantidad_Personas_Afectadas = this.emergencia.Cantidad_Personas_Afectadas;
+
+    console.log('Usuario a registrar: ', this.emergencia);
+    this.emergenciaservice.save(this.emergencia);
+    this.resetearForm();
+
 
   }
-
 }
