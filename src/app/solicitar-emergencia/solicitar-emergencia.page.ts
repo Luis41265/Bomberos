@@ -2,9 +2,16 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmergenciaService} from '../services/emergencia.service';
 import {AlertController} from '@ionic/angular';
 
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Emergencia} from '../Entidades/Emergencia';
+import {UsuarioService} from "../services/usuario.service";
+import {GpsService} from "../services/gps.service";
+import {TipoemergenciaService} from "../services/tipoemergencia.service";
+import {TipoEmergencia} from "../Entidades/TipoEmergencia";
+import {FotografiaService} from "../services/fotografia.service";
+import {CameraService} from "../services/camera.service";
+import {GalleryPhoto, Photo} from "@capacitor/camera";
 
 
 @Component({
@@ -31,23 +38,25 @@ export class SolicitarEmergenciaPage implements OnInit {
     Estado: true,
     // created_at: '',
     // updated_at: '',
-
   };
 
+  TiposEmergencias:TipoEmergencia[];
 
+  fotos:Photo[]=[];
+  fotosurl:string[]=[];
 
 
   formErrors = {
     // 'Id_Emergencia': " ",
     // 'Id_Usuario': " ",
     // 'Id_Tipo_Emergencia ': " ",
-    'Ubicacion': " ",
-    'Departamento': " ",
-    'Municipio': " ",
-    'Descripcion_Lugar': " ",
-    'Cantidad_Personas_Afectadas' : "" ,
-    'Descripcion_Emergencia': "",
-    'Estado': true,
+    'Ubicacion': "",
+    'Departamento': "",
+    'Municipio': "",
+    'Descripcion_Lugar': "",
+    'Cantidad_Personas_Afectadas': "",
+    'Descripcion_Emergencia': ""
+    //'Estado': true,
     // 'created_at': " ",
     // 'updated_at ': " "
   }
@@ -84,12 +93,42 @@ export class SolicitarEmergenciaPage implements OnInit {
   // };
 
   constructor(private fb: FormBuilder, private router: Router,
-    private alertController: AlertController, private emergenciaservice: EmergenciaService) {
-//this.emergencia = this.emergenciaservice.();
-this.createForm();
-}
+              private alertController: AlertController, private emergenciaservice: EmergenciaService,
+              private usuarioservice: UsuarioService, private gpsservice: GpsService, private tipoemergenciasservice:TipoemergenciaService,
+              private camaraservice:CameraService) {
+    this.emergencia.Id_Usuario = this.usuarioservice.getUsuario().Id_Usuario;
+    this.TiposEmergencias=this.tipoemergenciasservice.tiposemergencias;
+    this.createForm();
+    this.gpsservice.readActualPosition().then(posicion => {
+      this.emergencia.Ubicacion = JSON.stringify(posicion);
+      console.log('Posición obtenida del Usuario: ', posicion)
+    });
+
+  }
+
+  tomarFoto(){
+    this.camaraservice.pickPhotos().then(
+      fotosarray=>{
+        const fotos:GalleryPhoto[]=fotosarray.photos;
+        fotos.forEach(foto=>{
+          this.fotosurl.push(foto.webPath);
+          console.log('Se a añadido una nueva foto a la galeria: '+foto.webPath);
+        })
 
 
+
+      }
+
+    )
+  }
+
+  seleccionarFotos(){
+    this.camaraservice.getPhoto().then(data=>{
+      this.fotos.push(data)
+      this.fotosurl.push(data.webPath);
+      console.log('Se a añadido una nueva foto a la galeria: '+data.webPath);
+    });
+  }
 
   // public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
   //   const valor = control.value;
@@ -119,8 +158,8 @@ this.createForm();
       Municipio: [this.emergencia.Municipio, [Validators.required, Validators.email]],
       Descripcion_Lugar: [this.emergencia.Descripcion_Lugar, [Validators.required]],
       Descripcion_Emergencia: [this.emergencia.Descripcion_Emergencia, [Validators.required]],
-      Cantidad_Personas_Afectadas:  [this.emergencia.Cantidad_Personas_Afectadas, [Validators.required]],
-    //  Estado : [this.emergencia.Estado, [Validators.required]]
+      Cantidad_Personas_Afectadas: [this.emergencia.Cantidad_Personas_Afectadas, [Validators.required]],
+      //  Estado : [this.emergencia.Estado, [Validators.required]]
 
     });
     console.log('Ha creado el formulario')
@@ -171,9 +210,7 @@ this.createForm();
     const f = this.formularioEmergencia.value;
     console.log("Formulario a enviar: ", f);
     this.emergencia = this.formularioEmergencia.value;
-    this.emergencia.Id_Emergencia = 1;
-    this.emergencia.Id_Usuario = 1;
-    this.emergencia.Id_Tipo_Emergencia = 1;
+    this.emergencia.Id_Usuario = this.usuarioservice.getUsuario().Id_Usuario;
     this.emergencia.Ubicacion = this.emergencia.Ubicacion;
     this.emergencia.Departamento = this.emergencia.Departamento;
     this.emergencia.Municipio = this.emergencia.Municipio;

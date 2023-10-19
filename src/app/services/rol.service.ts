@@ -37,7 +37,7 @@ export class RolService {
     await alert.present();
   }
 
-  obtenerEmergencias(): void {
+  obtenerRoles(): void {
     this.apirest.get<Rol[]>(this.url).subscribe(result => {
         console.log("Roles Obtenidos: ");
         console.log(result);

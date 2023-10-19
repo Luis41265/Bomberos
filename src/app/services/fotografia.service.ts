@@ -76,7 +76,7 @@ export class FotografiaService {
           }
         });
         this.Alert('Fotografia Atención Emergencia ha sido actualizado exitosamente', '');
-        this.router.navigate(['/menu']);
+        //this.router.navigate(['/menu']);
       },
       error => {
         // Puedes pasarle el err en caso de que mandes el mensaje desde el

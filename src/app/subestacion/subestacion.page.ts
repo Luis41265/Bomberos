@@ -12,7 +12,7 @@ import {SubestacionService} from "../services/subestacion.service";
 })
 export class SubestacionPage implements OnInit {
 
-  formularioSubestacion :  FormGroup;
+  formularioSubestacion: FormGroup;
 
   @ViewChild('fform') materialFormDirective: any;
 
@@ -27,9 +27,9 @@ export class SubestacionPage implements OnInit {
     Municipio: "",
     Alcance_Sur: "",
     Alcance_Norte: "",
-    Alcance_Este : "",
-    Alcance_Oeste : "",
-    Estado : true,
+    Alcance_Este: "",
+    Alcance_Oeste: "",
+    Estado: true,
   }
 
   formErrors = {
@@ -43,7 +43,7 @@ export class SubestacionPage implements OnInit {
     'Alcance_Norte': "",
     'Alcance_Este': "",
     'Alcance_Oeste': "",
-    'Estado' : "",
+    'Estado': "",
 
   };
 
@@ -70,25 +70,25 @@ export class SubestacionPage implements OnInit {
     'Estado': {
       'required': 'El Estado  es requerido'
     },
-    'Alcance_Sur' :{
-    'required' : ' El Alcance sur es requerido'
-     },
+    'Alcance_Sur': {
+      'required': ' El Alcance sur es requerido'
+    },
 
-     'Alcance_Norte' : {
-      'required' : ' El Alcance norte es requerido'
-       },
-       'Alcance_Este' :{
-        'required' : ' El Alcance este es requerido'
-         },
-         'Alcance_Oeste' :{
-          'required' : ' El Alcance oeste es requerido'
-           },
+    'Alcance_Norte': {
+      'required': ' El Alcance norte es requerido'
+    },
+    'Alcance_Este': {
+      'required': ' El Alcance este es requerido'
+    },
+    'Alcance_Oeste': {
+      'required': ' El Alcance oeste es requerido'
+    },
 
   }
 
   constructor(private fb: FormBuilder, private router: Router,
               private alertController: AlertController, private subestacionservice: SubestacionService) {
-   // this.subestacion = this.subestacionservice.getUsuario();
+    // this.subestacion = this.subestacionservice.getUsuario();
     this.createForm();
   }
 
@@ -108,16 +108,14 @@ export class SubestacionPage implements OnInit {
     this.formularioSubestacion = this.fb.group({
       Nombre: [this.subestacion.Nombre, [Validators.required]],
       Direccion: [this.subestacion.Direccion, [Validators.required]],
-      Correo_Insitucional : [this.subestacion.Correo_Insitucional, [Validators.required, Validators.email]],
+      Correo_Insitucional: [this.subestacion.Correo_Insitucional, [Validators.required, Validators.email]],
       Telefono: [this.subestacion.Telefono, [Validators.required]],
-      Departamento : [this.subestacion.Departamento, [Validators.required]],
-      Municipio:  [this.subestacion.Municipio, [Validators.required]],
-      Alcance_Sur:  [this.subestacion.Alcance_Sur, [Validators.required]],
-      Alcance_Norte:  [this.subestacion.Alcance_Norte, [Validators.required]],
-      Alcance_Este:  [this.subestacion.Alcance_Este, [Validators.required]],
-      Alcance_Oeste:  [this.subestacion.Alcance_Oeste, [Validators.required]],
-
-
+      Departamento: [this.subestacion.Departamento, [Validators.required]],
+      Municipio: [this.subestacion.Municipio, [Validators.required]],
+      Alcance_Sur: [this.subestacion.Alcance_Sur, [Validators.required]],
+      Alcance_Norte: [this.subestacion.Alcance_Norte, [Validators.required]],
+      Alcance_Este: [this.subestacion.Alcance_Este, [Validators.required]],
+      Alcance_Oeste: [this.subestacion.Alcance_Oeste, [Validators.required]],
 
 
     });
@@ -190,6 +188,7 @@ export class SubestacionPage implements OnInit {
 
   }
 }
+
 //   subestacion = {
 //     nombre: '',
 //     direccion: '',

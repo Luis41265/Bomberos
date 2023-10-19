@@ -32,7 +32,7 @@
   <ion-button (click)="guardarEquipo()" expand="full">Guardar Equipo</ion-button>
 </ion-content> -->
 
-<form  #fform="ngForm" (ngSubmit)="registrarEquipo()" [formGroup]="formularioEquipo">
+<form #fform="ngForm" (ngSubmit)="registrarEquipo()" [formGroup]="formularioEquipo">
   <ion-list>
     <ion-item>
       <ion-input
@@ -44,35 +44,35 @@
     </ion-item>
 
     <ion-item *ngIf="formErrors.Nombre">
-        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Nombre}} </ion-label>
-      </ion-item>
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Nombre}} </ion-label>
+    </ion-item>
 
-      <ion-item>
+    <ion-item>
+      <ion-input
+        formControlName="Tipo"
+        placeholder="Tipo del Equipo"
+        type="text"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="formErrors.Tipo">
+      <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Tipo}} </ion-label>
+    </ion-item>
+
+    <!--  <ion-item>
         <ion-input
-          formControlName="Tipo"
-          placeholder="Tipo del Equipo"
+          formControlName="Estado"
+          placeholder="Estado del Equipo"
           type="text"
         >
         </ion-input>
       </ion-item>
 
-      <ion-item *ngIf="formErrors.Tipo">
-          <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Tipo}} </ion-label>
-        </ion-item>
-
-        <ion-item>
-          <ion-input
-            formControlName="Estado"
-            placeholder="Estado del Equipo"
-            type="text"
-          >
-          </ion-input>
-        </ion-item>
-
-        <ion-item *ngIf="formErrors.Estado">
-            <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Estado}} </ion-label>
-          </ion-item>
+      <ion-item *ngIf="formErrors.Estado">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Estado}} </ion-label>
+      </ion-item>-->
 
 
-  </ion-list>
-</form>
+    </ion-list>
+  </form>

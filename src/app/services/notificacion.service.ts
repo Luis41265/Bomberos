@@ -37,7 +37,7 @@ export class NotificacionService {
     await alert.present();
   }
 
-  obtenerEmergencias(idUsuario: number): void {
+  obtenerNotificacion(idUsuario: number): void {
     let urlTemp = this.url + "/" + idUsuario;
     this.apirest.get<Notificacion[]>(urlTemp).subscribe(result => {
         console.log("Notificaciones de Emergencias Obtenidos: ");

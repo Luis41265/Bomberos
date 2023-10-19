@@ -1,17 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormControl,
-  Validators,
-  FormBuilder,
-}from '@angular/forms';
-import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
+import {Component} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
+import {AlertController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {CredentialResponse} from 'google-one-tap';
 import {Usuario} from "../Entidades/Usuario";
 import {ApirestService} from "../services/apirest.service";
 import {Md5} from "ts-md5";
 import {UsuarioService} from "../services/usuario.service";
+
 //import { OAuthModule } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
@@ -20,78 +16,78 @@ import {UsuarioService} from "../services/usuario.service";
 })
 export class LoginPage {
 
-  usuario : Usuario = {
-    Id_Usuario:0,
-    Id_Rol:0,
+  usuario: Usuario = {
+    Id_Usuario: 0,
+    Id_Rol: 0,
     Id_Subestacion: 0,
-    Usuario:"",
+    Usuario: "",
     Contraseña: "",
-    Nombre:"",
-    CUI:"",
+    Nombre: "",
+    CUI: "",
     Telefono: '',
     Correo: "",
-    TokenActual:"",
-    Estado:true,
+    TokenActual: "",
+    Estado: true,
 
   }
 
-    loginForm: FormGroup;
-    username: string = '1';
-    password : string = '1';
+  loginForm: FormGroup;
+  username: string = '1';
+  password: string = '1';
 
 
-  constructor(  public fb : FormBuilder,
-    private router : Router,
-    private alertController: AlertController,
-    private apirest: ApirestService,
-                private usuarioservice:UsuarioService
-    ) {
+  constructor(public fb: FormBuilder,
+              private router: Router,
+              private alertController: AlertController,
+              private apirest: ApirestService,
+              private usuarioservice: UsuarioService
+  ) {
     this.initGoogle();
     this.loginForm = this.fb.group({
-    //loginForm = new FormGroup({
+      //loginForm = new FormGroup({
       'nombre': new FormControl("", Validators.required),
-      'password' : new FormControl(null, [Validators.required ,Validators.minLength(3),])
+      'password': new FormControl(null, [Validators.required, Validators.minLength(3),])
     })
 
 
-   }
+  }
 
-   iniciarSesion() {
+  iniciarSesion() {
 
-        // if(this.username == 'usuario' && this.password == '1234'){
-        //   this.router.navigate(['/menu']);
-
-
-        // } else {
-        //   alert('Credenciales Incorrectas');
-        // }
-        let url='login';
-    let password=this.usuario.Contraseña;
-    this.usuario.Contraseña=Md5.hashStr(this.usuario.Contraseña);
+    // if(this.username == 'usuario' && this.password == '1234'){
+    //   this.router.navigate(['/menu']);
 
 
-    console.log('Password sin encriptar: '+password);
-    console.log('Nombre Usuario: '+this.usuario.Usuario);
-    console.log('Contraseña Encriptada: '+this.usuario.Contraseña);
-    console.log('Consumira el RestAPI: '+url);
+    // } else {
+    //   alert('Credenciales Incorrectas');
+    // }
+    let url = 'login';
+    let password = this.usuario.Contraseña;
+    this.usuario.Contraseña = Md5.hashStr(this.usuario.Contraseña);
+
+
+    console.log('Password sin encriptar: ' + password);
+    console.log('Nombre Usuario: ' + this.usuario.Usuario);
+    console.log('Contraseña Encriptada: ' + this.usuario.Contraseña);
+    console.log('Consumira el RestAPI: ' + url);
     console.log(this.usuario);
 
     this.apirest.put(url, this.usuario).subscribe(usuario => {
-            // Entra aquí con respuesta del servicio correcta código http 200
-            console.log('Se autentico correctamente');
-            console.log(usuario);
-            this.apirest.setToken(usuario.TokenActual);
-            this.usuario.Contraseña='';
-            this.usuario=usuario;
-           // this.apirest.usuario=this.usuario;
-            this.router.navigate(['/menu']);
-        }, err => {
-            // Puedes pasarle el err en caso de que mandes el mensaje desde el
-            console.log('Las credenciales no son correctas');
-            console.log(err);
-            this.presentAlertLogin();
-            this.usuario.Contraseña='';
-        }
+        // Entra aquí con respuesta del servicio correcta código http 200
+        console.log('Se autentico correctamente');
+        console.log(usuario);
+        this.apirest.setToken(usuario.TokenActual);
+        this.usuario.Contraseña = '';
+        this.usuario = usuario;
+        // this.apirest.usuario=this.usuario;
+        this.router.navigate(['/menu']);
+      }, err => {
+        // Puedes pasarle el err en caso de que mandes el mensaje desde el
+        console.log('Las credenciales no son correctas');
+        console.log(err);
+        this.presentAlertLogin();
+        this.usuario.Contraseña = '';
+      }
     );
 
     //this.router.navigate(['/menu']);
@@ -109,7 +105,7 @@ export class LoginPage {
   }
 
 
-  async Alert(header:string, subheader:string) {
+  async Alert(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -119,7 +115,7 @@ export class LoginPage {
     await alert.present();
   }
 
-  async AlertError(header:string, subheader:string) {
+  async AlertError(header: string, subheader: string) {
     const alert = await this.alertController.create({
       header: header,
       subHeader: subheader,
@@ -128,7 +124,6 @@ export class LoginPage {
     });
     await alert.present();
   }
-
 
 
   iniciarSesionOAuth() {
@@ -232,4 +227,4 @@ export class LoginPage {
   }
 
 
-  }
+}

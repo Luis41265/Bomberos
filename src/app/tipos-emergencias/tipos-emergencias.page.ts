@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {TipoEmergencia} from "../Entidades/TipoEmergencia";
 import {TipoemergenciaService} from "../services/tipoemergencia.service";
+
 @Component({
   selector: 'app-tipos-emergencias',
   templateUrl: './tipos-emergencias.page.html',
@@ -11,13 +12,13 @@ import {TipoemergenciaService} from "../services/tipoemergencia.service";
 })
 export class TiposEmergenciasPage implements OnInit {
 
-  formularioTipoEmergencia : FormGroup;
+  formularioTipoEmergencia: FormGroup;
 
   @ViewChild('fform') materialFormDirective: any;
 
-  tipoemergencia  : TipoEmergencia = {
-    Id_Tipo_Emergencia : 0,
-    Prioridad:  1,
+  tipoemergencia: TipoEmergencia = {
+    Id_Tipo_Emergencia: 0,
+    Prioridad: 1,
     Nombre: '',
     Color: '',
     Estado: true,
@@ -120,7 +121,7 @@ export class TiposEmergenciasPage implements OnInit {
     console.log("Formulario a enviar: ", f);
     this.tipoemergencia = this.formularioTipoEmergencia.value;
     this.tipoemergencia.Id_Tipo_Emergencia = 1;
-    this.tipoemergencia.Nombre = this.tipoemergencia.Nombre ;
+    this.tipoemergencia.Nombre = this.tipoemergencia.Nombre;
     this.tipoemergencia.Color = this.tipoemergencia.Color;
     this.tipoemergencia.Estado = this.tipoemergencia.Estado;
     console.log('Usuario a registrar: ', this.tipoemergencia);

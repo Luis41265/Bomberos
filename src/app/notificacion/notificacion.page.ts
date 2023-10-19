@@ -1,9 +1,10 @@
-import {Component, OnInit,ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Notificacion} from "../Entidades/Notificacion";
 import {NotificacionService} from "../services/notificacion.service";
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
+
 @Component({
   selector: 'app-notificacion',
   templateUrl: './notificacion.page.html',
@@ -15,14 +16,13 @@ export class NotificacionPage implements OnInit {
 
   @ViewChild('fform') materialFormDirective: any;
 
-  notificacion : Notificacion = {
+  notificacion: Notificacion = {
     Id_Notificacion: 0,
-    Id_Usuario : 0,
-    Id_Emergencia : 0,
-    Fecha_Hora : '',
-    IsOpen : true,
-    Estado : true,
-
+    Id_Usuario: 0,
+    Id_Emergencia: 0,
+    Fecha_Hora: '',
+    IsOpen: true,
+    Estado: true,
 
 
   }
@@ -62,7 +62,7 @@ export class NotificacionPage implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router,
               private alertController: AlertController, private notificacionservice: NotificacionService) {
-   // this.notificacion = this.notificacionservice.getUsuario();
+    // this.notificacion = this.notificacionservice.getUsuario();
     this.createForm();
   }
 

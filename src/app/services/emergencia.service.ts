@@ -3,6 +3,8 @@ import {ApirestService} from "./apirest.service";
 import {AlertController} from "@ionic/angular";
 import {Emergencia} from "../Entidades/Emergencia";
 import {Router} from "@angular/router";
+import {FotografiaService} from "./fotografia.service";
+import {Fotografia} from "../Entidades/Fotografia";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,7 @@ export class EmergenciaService {
   private urldelete: string = "/delete";
 
   constructor(private apirest: ApirestService, private alertController: AlertController,
-              private router: Router) {
+              private router: Router, private photoservice:FotografiaService) {
   }
 
   async emergenciaAlert(header: string, subheader: string) {
@@ -75,6 +77,16 @@ export class EmergenciaService {
             emergencia = result;
           }
         });
+
+
+        let tempFoto=new Fotografia();
+        tempFoto.Id_Emergencia=result.Id_Emergencia;
+        //tempFoto.ImageBase64=se lea la foto
+        //Añadir el envío de las fotos al restapi
+        this.photoservice.save(tempFoto);
+
+
+
         this.emergenciaAlert('Emergencia ha sido actualizada exitosamente', '');
         this.router.navigate(['/menu']);
       },

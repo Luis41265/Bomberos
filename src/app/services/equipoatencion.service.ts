@@ -37,7 +37,7 @@ export class EquipoatencionService {
     await alert.present();
   }
 
-  obtenerEmergencias(): void {
+  obtenerEquipoAtencion(): void {
     this.apirest.get<EquipoAtencion[]>(this.url).subscribe(result => {
         console.log("Detalles de Equipo Emergencias Obtenidos: ");
         console.log(result);

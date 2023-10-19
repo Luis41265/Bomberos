@@ -1,4 +1,4 @@
-import {Component, OnInit,ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
@@ -21,12 +21,12 @@ export class IngresarEquipoPage implements OnInit {
     Nombre: "",
     Tipo: "",
     Estado: true,
-      }
+  }
 
   formErrors = {
     'Nombre': "",
     'Tipo': "",
-    'Estado': ""
+    //'Estado': ""
   };
 
   validationMessages = {
@@ -36,16 +36,14 @@ export class IngresarEquipoPage implements OnInit {
     'tipo': {
       'required': 'El tipo del equipo es requerido',
     },
-     'Estado':{
 
-      ' required' : 'El estado del equipo es requerido'
-     }
 
   }
 
   constructor(private fb: FormBuilder, private router: Router,
-              private alertController: AlertController, private equipoatencionservice: EquipoatencionService) {
-   // this.EquipoAtencion = this.equipoatencionservice.getUsuario();
+              private alertController: AlertController,
+              private equipoatencionservice: EquipoatencionService) {
+    this.equipoatencionservice.obtenerEquipoAtencion();
     this.createForm();
   }
 
@@ -76,7 +74,7 @@ export class IngresarEquipoPage implements OnInit {
     this.formularioEquipo.reset({
       Nombre: '',
       Tipo: '',
-      Estado: '',
+     // Estado: '',
 
     });
     this.materialFormDirective.resetForm();
@@ -115,7 +113,7 @@ export class IngresarEquipoPage implements OnInit {
     this.EquipoAtencion = this.formularioEquipo.value;
     this.EquipoAtencion.Id_Equipo = 1;
     this.EquipoAtencion.Nombre = this.EquipoAtencion.Nombre;
-    this.EquipoAtencion.Tipo = this.EquipoAtencion.Tipo ;
+    this.EquipoAtencion.Tipo = this.EquipoAtencion.Tipo;
     this.EquipoAtencion.Estado = this.EquipoAtencion.Estado;
 
     console.log('Usuario a registrar: ', this.EquipoAtencion);
