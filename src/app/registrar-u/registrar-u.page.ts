@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import {Usuario} from "../Entidades/Usuario";
 import {UsuarioService} from "../services/usuario.service";
+import {Md5} from "ts-md5";
 
 @Component({
   selector: 'app-registrar-u',
@@ -82,8 +83,10 @@ export class RegistrarUPage implements OnInit {
         this.onValueChanged(data);
       }
     );
+    this.onValueChanged();
     console.log("Formulario, ", this.formularioRegistro)
     console.log('Ha Suscrito el formulario')
+
   }
 
   createForm(): void {
@@ -148,7 +151,7 @@ export class RegistrarUPage implements OnInit {
     this.usuario.Id_Subestacion = 1;
     this.usuario.Nombre = this.usuario.given_name + ' ' + this.usuario.family_name;
     this.usuario.Usuario = this.usuario.Nombre;
-    this.usuario.Contraseña = this.usuario.Contrasenia;
+    this.usuario.Contraseña = Md5.hashStr(this.usuario.Contrasenia);
     console.log('Usuario a registrar: ', this.usuario);
     this.usuarioservice.save(this.usuario);
     this.resetearForm();

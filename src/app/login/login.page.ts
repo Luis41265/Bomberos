@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
@@ -32,8 +32,25 @@ export class LoginPage {
   }
 
   loginForm: FormGroup;
-  username: string = '1';
-  password: string = '1';
+
+  @ViewChild('fform') materialFormDirective: any;
+
+  formErrors = {
+    'Correo': "",
+    'Contrasenia': ""
+  };
+
+  validationMessages = {
+    'Correo': {
+      'required': 'El Correo del Usuario es requerido',
+      'email': 'Ingrese un correo valido por favor'
+    },
+    'Contrasenia': {
+      'required': 'La contraseña del Usuario es requerido',
+      'minlength': 'La contraseña No puede ser menor a 7 caracteres'
+    }
+
+  }
 
 
   constructor(public fb: FormBuilder,
@@ -45,75 +62,68 @@ export class LoginPage {
     this.initGoogle();
     this.loginForm = this.fb.group({
       //loginForm = new FormGroup({
-      'nombre': new FormControl("", Validators.required),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(3),])
-    })
+      'Correo': new FormControl("", [Validators.required, Validators.email]),
+      'Contrasenia': new FormControl(null, [Validators.required, Validators.minLength(7),])
+    });
 
-
-  }
-
-  iniciarSesion() {
-
-    // if(this.username == 'usuario' && this.password == '1234'){
-    //   this.router.navigate(['/menu']);
-
-
-    // } else {
-    //   alert('Credenciales Incorrectas');
-    // }
-    let url = 'login';
-    let password = this.usuario.Contraseña;
-    this.usuario.Contraseña = Md5.hashStr(this.usuario.Contraseña);
-
-
-    console.log('Password sin encriptar: ' + password);
-    console.log('Nombre Usuario: ' + this.usuario.Usuario);
-    console.log('Contraseña Encriptada: ' + this.usuario.Contraseña);
-    console.log('Consumira el RestAPI: ' + url);
-    console.log(this.usuario);
-
-    this.apirest.put(url, this.usuario).subscribe(usuario => {
-        // Entra aquí con respuesta del servicio correcta código http 200
-        console.log('Se autentico correctamente');
-        console.log(usuario);
-        this.apirest.setToken(usuario.TokenActual);
-        this.usuario.Contraseña = '';
-        this.usuario = usuario;
-        // this.apirest.usuario=this.usuario;
-        this.router.navigate(['/menu']);
-      }, err => {
-        // Puedes pasarle el err en caso de que mandes el mensaje desde el
-        console.log('Las credenciales no son correctas');
-        console.log(err);
-        this.presentAlertLogin();
-        this.usuario.Contraseña = '';
+    console.log("Formulario, ", this.loginForm)
+    this.loginForm.valueChanges.pipe().subscribe(
+      data => {
+        //console.log("Data que validara el formulario: ", data);
+        this.onValueChanged(data);
       }
     );
 
-    //this.router.navigate(['/menu']);
+    console.log("Formulario, ", this.loginForm)
+    console.log('Ha Suscrito el formulario')
+
+
 
   }
 
-  async presentAlertLogin() {
-    const alert = await this.alertController.create({
-      header: 'Credenciales no validas',
-      //subHeader: 'Important message',
-      message: 'Vuelva a ingresar sus credenciales por favor!',
-      buttons: ['OK'],
+
+  onValueChanged(data?: any): void {
+    //console.log('Data recibida', data)
+    if (!this.loginForm) {
+      return;
+    }
+
+    const form = this.loginForm;
+    for (const field in this.formErrors) {
+      if (this.formErrors.hasOwnProperty(field)) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.formErrors[field] += messages[key] + ' ';
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  resetearForm(): void {
+    this.loginForm.reset({
+      Usuario: '',
+      Contrasenia: ''
     });
-    await alert.present();
+    this.materialFormDirective.resetForm();
   }
 
+  iniciarSesion() {
+    this.usuario = this.loginForm.value;
+    this.usuario.Contraseña = Md5.hashStr(this.usuario.Contrasenia);
+    console.log('Usuario a iniciar sesión: ', JSON.stringify(this.usuario))
+    this.usuarioservice.login(this.usuario);
+    this.resetearForm();
 
-  async Alert(header: string, subheader: string) {
-    const alert = await this.alertController.create({
-      header: header,
-      subHeader: subheader,
-      //message: 'Asegurese de utilizar un Id Material que no exista en el Sistema!',
-      buttons: ['OK'],
-    });
-    await alert.present();
   }
+
 
   async AlertError(header: string, subheader: string) {
     const alert = await this.alertController.create({
@@ -126,17 +136,15 @@ export class LoginPage {
   }
 
 
-  iniciarSesionOAuth() {
-    const proveedorOAuth = 'https://google-oauth.com/authorize';
-    const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
-    const redirectURI = 'https://accounts.google.com';
-    const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
+    iniciarSesionOAuth() {
+      const proveedorOAuth = 'https://google-oauth.com/authorize';
+      const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
+      const redirectURI = 'https://accounts.google.com';
+      const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
 
-  }
+    }
 
-  Registrarse() {
 
-  }
 
   async mostrarTelefono() {
     const alert = await this.alertController.create({

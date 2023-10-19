@@ -13,65 +13,53 @@
 
     <!-- CREDENCIALES DEL USUARIO -->
 
-    <form [formGroup]="loginForm">
-      <ion-item button>
-        <ion-input
-          autofocus="true"
-          formControlName="nombre"
-          placeholder="Usuario..."
-          type="text"
-        >
-        </ion-input>
-      </ion-item>
+      <form   [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="iniciarSesion()" >
+        <ion-item button>
+          <ion-input
+            autofocus="true"
+            formControlName="Correo"
+            placeholder="Usuario..."
+            type="text"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-item *ngIf="formErrors.Correo">
+          <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Correo}} </ion-label>
+        </ion-item>
 
-      <ion-item>
-        <ion-input
-          autofocus="true"
-          formControlName="password"
-          placeholder="Contraseña"
-          type="password"
-          type="text"
-        >
-        </ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input
+            autofocus="true"
+            formControlName="Contrasenia"
+            placeholder="Contrasenia"
+            type="password"
+          >
+          </ion-input>
+        </ion-item>
+        <ion-item *ngIf="formErrors.Contrasenia">
+          <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Contrasenia}} </ion-label>
+        </ion-item>
 
-
-      <ion-button (click)="iniciarSesion()"> Iniciar Sesión</ion-button>
-      <!-- [disabled] = "!loginForm || !loginForm.valid"  -->
-
-      <ion-button (click)="loginGoogle()">
-        <ion-icon name="logo-google" slot="start"></ion-icon>
-      </ion-button>
-      <!-- <ion-item>
-      <ion-text (click) = "Registrarse()"> Registrarse  Aqui</ion-text>
-    </ion-item> -->
-    </form>
+        <ion-button type="submit" > Iniciar Sesión</ion-button>
+      </form>
 
 
     <ion-label>No tienes usuario?</ion-label>
     <ion-buttons class="ion-text-center" color="medium" slot="end">
+
       <ion-button [routerLink]="['/registrar-u']" color="dark" expand="full">
         <span class="underline-text">Registrarse Aquí</span>
+      </ion-button>
+      <ion-button (click)="loginGoogle()">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
       </ion-button>
     </ion-buttons>
 
 
-    <!-- <ion-footer>
-      <ion-toolbar color = "medium">
-        <ion-buttons slot = "end">
-          <ion-button [routerLink] = "['/menu']"> prueba </ion-button>
-        </ion-buttons>
 
-      </ion-toolbar>
 
-    </ion-footer> -->
 
-    <!--   <ion-button>
-         <div class="ion-logo">
-           <ion-icon slot="start" name="logo-google"></ion-icon>
-           Ingresar con Google
-         </div>
-       </ion-button> -->
+
 
 
   </div>
@@ -79,5 +67,5 @@
   <!-- <div class="logo_Daps">
     <img src="assets\daps\logoBomberos.jpeg" />
   </div> -->
-  <ion-button (click)="mostrarTelefono()" class="contact-button" slot="fixed">Contactar a Bomberos</ion-button>
+  <ion-button  (click)="mostrarTelefono()" class="contact-button" slot="fixed">Contactar a Bomberos</ion-button>
 </ion-content>
