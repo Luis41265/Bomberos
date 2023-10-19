@@ -38,7 +38,6 @@ export class MenuPage implements OnInit {
     //this.notificacionservice.obtenerNotificacion();
     this.detalleequiposervice.obtenerDetalleEquipo();
     this.notificacionservice.obtenerNotificacion(this.usuarioservice.getUsuario().Id_Usuario);
-    this.fotografiasservice.obtenerFotografias();
     this.subestacionservice.obtenerSubestaciones();
     this.tipoemergenciaservice.obtenerTiposEmergencias();
 
