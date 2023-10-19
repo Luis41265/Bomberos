@@ -37,7 +37,7 @@ export class FotografiaService {
     await alert.present();
   }
 
-  obtenerEmergencias(): void {
+  obtenerFotografias(): void {
     this.apirest.get<Fotografia[]>(this.url).subscribe(result => {
         console.log("Fotografias de Emergencias Obtenidas: ");
         console.log(result);

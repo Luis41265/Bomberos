@@ -37,7 +37,7 @@ export class TipoemergenciaService {
     await alert.present();
   }
 
-  obtenerEmergencias(): void {
+  obtenerTiposEmergencias(): void {
     this.apirest.get<TipoEmergencia[]>(this.url).subscribe(result => {
         console.log("Tipos de Emergencias Obtenidas: ");
         console.log(result);

@@ -37,7 +37,7 @@ export class SubestacionService {
     await alert.present();
   }
 
-  obtenerEmergencias(): void {
+  obtenerSubestaciones(): void {
     this.apirest.get<Subestacion[]>(this.url).subscribe(result => {
         console.log("Subestaciones Obtenidas: ");
         console.log(result);

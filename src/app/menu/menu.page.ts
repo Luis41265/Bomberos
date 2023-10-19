@@ -7,6 +7,10 @@ import {DetalleequipoService} from "../services/detalleequipo.service";
 import {EmergenciaService} from "../services/emergencia.service";
 import {EquipoatencionService} from "../services/equipoatencion.service";
 import {NotificacionService} from "../services/notificacion.service";
+import {UsuarioService} from "../services/usuario.service";
+import {FotografiaService} from "../services/fotografia.service";
+import {SubestacionService} from "../services/subestacion.service";
+import {TipoemergenciaService} from "../services/tipoemergencia.service";
 
 @Component({
   selector: 'app-menu',
@@ -21,7 +25,11 @@ export class MenuPage implements OnInit {
   private detalleequiposervice : DetalleequipoService,
               private emergenciaservice : EmergenciaService,
               private equipoatencionservice : EquipoatencionService,
-              //private notificacionservice: NotificacionService
+              private notificacionservice: NotificacionService,
+              private usuarioservice:UsuarioService,
+              private fotografiasservice:FotografiaService,
+              private subestacionservice:SubestacionService,
+              private tipoemergenciaservice:TipoemergenciaService
   ) {
     this.rolservice.obtenerRoles();
     this.detalleatencionservice.obtenerDetalleAtencion();
@@ -29,6 +37,11 @@ export class MenuPage implements OnInit {
     this.emergenciaservice.obtenerEmergencias();
     //this.notificacionservice.obtenerNotificacion();
     this.detalleequiposervice.obtenerDetalleEquipo();
+    this.notificacionservice.obtenerNotificacion(this.usuarioservice.getUsuario().Id_Usuario);
+    this.fotografiasservice.obtenerFotografias();
+    this.subestacionservice.obtenerSubestaciones();
+    this.tipoemergenciaservice.obtenerTiposEmergencias();
+
   }
 
 
