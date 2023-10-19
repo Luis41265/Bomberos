@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, Inject, Renderer2, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {Router} from '@angular/router';
@@ -7,7 +7,10 @@ import {Usuario} from "../Entidades/Usuario";
 import {ApirestService} from "../services/apirest.service";
 import {Md5} from "ts-md5";
 import {UsuarioService} from "../services/usuario.service";
+import {DOCUMENT} from "@angular/common";
 
+
+declare let window: any;
 //import { OAuthModule } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
@@ -15,6 +18,7 @@ import {UsuarioService} from "../services/usuario.service";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
+
 
   usuario: Usuario = {
     Id_Usuario: 0,
@@ -57,15 +61,15 @@ export class LoginPage {
               private router: Router,
               private alertController: AlertController,
               private apirest: ApirestService,
-              private usuarioservice: UsuarioService
+              private usuarioservice: UsuarioService,
+              private render:Renderer2, @Inject(DOCUMENT) private document:Document
   ) {
-    this.initGoogle();
+
     this.loginForm = this.fb.group({
       //loginForm = new FormGroup({
       'Correo': new FormControl("", [Validators.required, Validators.email]),
       'Contrasenia': new FormControl(null, [Validators.required, Validators.minLength(7),])
     });
-
     console.log("Formulario, ", this.loginForm)
     this.loginForm.valueChanges.pipe().subscribe(
       data => {
@@ -73,7 +77,6 @@ export class LoginPage {
         this.onValueChanged(data);
       }
     );
-
     console.log("Formulario, ", this.loginForm)
     console.log('Ha Suscrito el formulario')
 
@@ -81,6 +84,16 @@ export class LoginPage {
 
   }
 
+
+  /*ngAfterViewInit() {
+    console.log('Comienza Carga de script de google')
+    const script1 = this.render.createElement('script');
+    script1.src = 'https://accounts.google.com/gsi/client';
+    script1.async = 'true';
+    script1.defer = 'true';
+    this.render.appendChild(this.document.body, script1);
+    console.log('Finaliza Carga de script de google')
+  }*/
 
   onValueChanged(data?: any): void {
     //console.log('Data recibida', data)
@@ -157,10 +170,11 @@ export class LoginPage {
 
   initGoogle() {
     const thisClass = this;
-    // @ts-ignore
+
     console.log('Google\'s One-tap sign in script loaded!');
-    // @ts-ignore
-    google.accounts.id.initialize({
+    //console.log(JSON.stringify(window.google));
+    //console.log(JSON.stringify(window.google.accounts));
+    window.google.accounts.id.initialize({
       // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
       client_id: '845227166117-d6nopp7mpmeots7qne3tji8lbaecuo2a.apps.googleusercontent.com',
       callback: (response: CredentialResponse) => {
@@ -174,12 +188,14 @@ export class LoginPage {
   }
 
   loginGoogle() {
-    // @ts-ignore
-    google.accounts.id.prompt((notification) => {
+    this.initGoogle();
+
+    //console.log(JSON.stringify(window.google));
+    //console.log(JSON.stringify(window.google.accounts));
+    window.google.accounts.id.prompt((notification) => {
       if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
         document.cookie =  `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-        // @ts-ignore
-        google.accounts.id.prompt()
+        window.google.accounts.id.prompt()
       }
     });
   }
