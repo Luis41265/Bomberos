@@ -210,7 +210,7 @@ export class LoginPage {
     // this.usuarioservice.getUsuario().Correo=email;
     // this.usuarioservice.getUsuario().Nombre=name;
     let usuarioExist = false;
-    //usuarioExist=await this.usuarioservice.verify(this.usuario);
+    usuarioExist=await this.usuarioservice.verify(this.usuario);
     console.log('Resultado de verificar la existencia del usuario: ', usuarioExist);
     if (usuarioExist) {
       this.usuarioservice.loginGoogle(this.usuario);
