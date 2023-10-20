@@ -93,7 +93,7 @@
       <ion-item>
         <ion-input
           formControlName="Descripcion_Emergencia"
-          placeholder="Descripicon de Emergencia..."
+          placeholder="Descripcion de Emergencia..."
           type="text">
         </ion-input>
       </ion-item>
@@ -101,9 +101,9 @@
         <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Descripcion_Emergencia}} </ion-label>
       </ion-item>
 
-      <ion-button (click)="tomarFoto()" color="medium" expand="full">Tomar Foto</ion-button>
+      <ion-button (click)="seleccionarFotos()" color="medium" expand="full">Tomar Foto</ion-button>
 
-      <ion-button (click)="seleccionarFotos()" color="medium" expand="full">Seleccionar Fotos</ion-button>
+      <ion-button (click)="tomarFoto()" color="medium" expand="full">Seleccionar Fotos</ion-button>
 
 
     </ion-list>

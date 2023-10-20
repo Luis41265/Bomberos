@@ -113,13 +113,20 @@ export class SolicitarEmergenciaPage implements OnInit {
         fotos.forEach(foto=>{
           this.fotosurl.push(foto.webPath);
           console.log('Se a añadido una nueva foto a la galeria: '+foto.webPath);
-        })
+          // leer foto
 
+          const response = await fetch (foto.webPath)
+          const blob = await response.blob();
 
+          // Convertir imagen a  base64
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            const base64data = reader.result.toString();
+            console.log('Imagen en base64:', base64data);
+          }
 
-      }
-
-    )
+        });
+      })
   }
 
   seleccionarFotos(){
@@ -127,6 +134,9 @@ export class SolicitarEmergenciaPage implements OnInit {
       this.fotos.push(data)
       this.fotosurl.push(data.webPath);
       console.log('Se a añadido una nueva foto a la galeria: '+data.webPath);
+
+
+
     });
   }
 

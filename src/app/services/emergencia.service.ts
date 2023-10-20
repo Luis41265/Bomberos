@@ -67,7 +67,7 @@ export class EmergenciaService {
         this.emergenciaAlertError('Emergencia No ha sido creada exitosamente', 'Vuelva a Intentarlo Por favor!!!');
       });
   }
-
+//OBTENER FOTO
   save(emergencia: Emergencia): void {
     this.apirest.put<Emergencia>(this.url, emergencia).subscribe(result => {
         console.log("Resultado de actualizar la emergencia: ");
