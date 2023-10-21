@@ -37,8 +37,8 @@ export class FotografiaService {
     await alert.present();
   }
 
-  obtenerFotografias(Id_Emergencia:number): void {
-    this.apirest.get<Fotografia[]>(this.url+'/'+Id_Emergencia).subscribe(result => {
+  obtenerFotografias(Id_Emergencia: number): void {
+    this.apirest.get<Fotografia[]>(this.url + '/' + Id_Emergencia).subscribe(result => {
         console.log("Fotografias de Emergencias Obtenidas: ");
         console.log(result);
         this.fotografiasemergencias = result;
@@ -50,13 +50,13 @@ export class FotografiaService {
       });
   }
 
-  update(Fotografia: Fotografia): void {
+  save(Fotografia: Fotografia): void {
     this.apirest.post<Fotografia>(this.url, Fotografia).subscribe(result => {
         console.log("Resultado de guardar Fotografia Atención Emergencia: ");
         console.log(result);
         this.fotografiasemergencias.push(result);
-        this.Alert('Fotografia Atención Emergencia ha sido creado exitosamente', '');
-        this.router.navigate(['/menu']);
+        this.Alert('Fotografia Atención Emergencia ha sido almacenada exitosamente', '');
+        //this.router.navigate(['/menu']);
       },
       error => {
         // Puedes pasarle el err en caso de que mandes el mensaje desde el
@@ -66,7 +66,7 @@ export class FotografiaService {
       });
   }
 
-  save(Fotografia: Fotografia): void {
+  update(Fotografia: Fotografia): void {
     this.apirest.put<Fotografia>(this.url, Fotografia).subscribe(result => {
         console.log("Resultado de actualizar Fotografia Atención Emergencia: ");
         console.log(result);
@@ -75,7 +75,7 @@ export class FotografiaService {
             temp = result;
           }
         });
-        this.Alert('Fotografia Atención Emergencia ha sido actualizado exitosamente', '');
+        this.Alert('Fotografia Atención Emergencia ha sido almacenada exitosamente', '');
         //this.router.navigate(['/menu']);
       },
       error => {

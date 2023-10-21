@@ -13,35 +13,35 @@
 
     <!-- CREDENCIALES DEL USUARIO -->
 
-      <form   [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="iniciarSesion()" >
-        <ion-item button>
-          <ion-input
-            autofocus="true"
-            formControlName="Correo"
-            placeholder="Usuario..."
-            type="text"
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item *ngIf="formErrors.Correo">
-          <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Correo}} </ion-label>
-        </ion-item>
+    <form #fform="ngForm" (ngSubmit)="iniciarSesion()" [formGroup]="loginForm">
+      <ion-item button>
+        <ion-input
+          autofocus="true"
+          formControlName="Correo"
+          placeholder="Usuario..."
+          type="text"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.Correo">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Correo}} </ion-label>
+      </ion-item>
 
-        <ion-item>
-          <ion-input
-            autofocus="true"
-            formControlName="Contrasenia"
-            placeholder="Contrasenia"
-            type="password"
-          >
-          </ion-input>
-        </ion-item>
-        <ion-item *ngIf="formErrors.Contrasenia">
-          <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Contrasenia}} </ion-label>
-        </ion-item>
+      <ion-item>
+        <ion-input
+          autofocus="true"
+          formControlName="Contrasenia"
+          placeholder="Contrasenia"
+          type="password"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item *ngIf="formErrors.Contrasenia">
+        <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Contrasenia}} </ion-label>
+      </ion-item>
 
-        <ion-button type="submit" > Iniciar Sesión</ion-button>
-      </form>
+      <ion-button type="submit"> Iniciar Sesión</ion-button>
+    </form>
 
 
     <ion-label>No tienes usuario?</ion-label>
@@ -56,16 +56,10 @@
     </ion-buttons>
 
 
-
-
-
-
-
-
   </div>
   <!-- LOGO DE INGRESO -->
   <!-- <div class="logo_Daps">
     <img src="assets\daps\logoBomberos.jpeg" />
   </div> -->
-  <ion-button  (click)="mostrarTelefono()" class="contact-button" slot="fixed">Contactar a Bomberos</ion-button>
+  <ion-button (click)="mostrarTelefono()" class="contact-button" slot="fixed">Contactar a Bomberos</ion-button>
 </ion-content>

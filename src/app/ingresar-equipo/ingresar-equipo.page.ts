@@ -74,7 +74,7 @@ export class IngresarEquipoPage implements OnInit {
     this.formularioEquipo.reset({
       Nombre: '',
       Tipo: '',
-     // Estado: '',
+      // Estado: '',
 
     });
     this.materialFormDirective.resetForm();

@@ -11,6 +11,7 @@ import {DOCUMENT} from "@angular/common";
 
 
 declare let window: any;
+
 //import { OAuthModule } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-login',
@@ -62,7 +63,7 @@ export class LoginPage {
               private alertController: AlertController,
               private apirest: ApirestService,
               private usuarioservice: UsuarioService,
-              private render:Renderer2, @Inject(DOCUMENT) private document:Document
+              private render: Renderer2, @Inject(DOCUMENT) private document: Document
   ) {
 
     this.loginForm = this.fb.group({
@@ -79,7 +80,6 @@ export class LoginPage {
     );
     console.log("Formulario, ", this.loginForm)
     console.log('Ha Suscrito el formulario')
-
 
 
   }
@@ -149,14 +149,13 @@ export class LoginPage {
   }
 
 
-    iniciarSesionOAuth() {
-      const proveedorOAuth = 'https://google-oauth.com/authorize';
-      const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
-      const redirectURI = 'https://accounts.google.com';
-      const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
+  iniciarSesionOAuth() {
+    const proveedorOAuth = 'https://google-oauth.com/authorize';
+    const clientID = '845227166117-46chud1o51ouloqlumtp72fudk0lq7j2.apps.googleusercontent.com';
+    const redirectURI = 'https://accounts.google.com';
+    const authUrl = `${proveedorOAuth}?client_id=${clientID}&redirect_uri=${redirectURI}&response_type=token`;
 
-    }
-
+  }
 
 
   async mostrarTelefono() {
@@ -194,7 +193,7 @@ export class LoginPage {
     //console.log(JSON.stringify(window.google.accounts));
     window.google.accounts.id.prompt((notification) => {
       if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        document.cookie =  `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+        document.cookie = `g_state=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT`;
         window.google.accounts.id.prompt()
       }
     });
@@ -226,7 +225,7 @@ export class LoginPage {
     // this.usuarioservice.getUsuario().Correo=email;
     // this.usuarioservice.getUsuario().Nombre=name;
     let usuarioExist = false;
-    usuarioExist=await this.usuarioservice.verify(this.usuario);
+    usuarioExist = await this.usuarioservice.verify(this.usuario);
     console.log('Resultado de verificar la existencia del usuario: ', usuarioExist);
     if (usuarioExist) {
       this.usuarioservice.loginGoogle(this.usuario);

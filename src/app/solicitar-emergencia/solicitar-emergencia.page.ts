@@ -9,7 +9,6 @@ import {UsuarioService} from "../services/usuario.service";
 import {GpsService} from "../services/gps.service";
 import {TipoemergenciaService} from "../services/tipoemergencia.service";
 import {TipoEmergencia} from "../Entidades/TipoEmergencia";
-import {FotografiaService} from "../services/fotografia.service";
 import {CameraService} from "../services/camera.service";
 import {GalleryPhoto, Photo} from "@capacitor/camera";
 
@@ -40,11 +39,12 @@ export class SolicitarEmergenciaPage implements OnInit {
     // updated_at: '',
   };
 
-  TiposEmergencias:TipoEmergencia[];
+  TiposEmergencias: TipoEmergencia[];
 
-  fotos:Photo[]=[];
-  fotosurl:string[]=[];
-
+  fotos: Photo[] = [];
+  fotosurl: string[] = [];
+  fotosBase64: string[] = [];
+  ubicacion: string;
 
   formErrors = {
     // 'Id_Emergencia': " ",
@@ -94,60 +94,63 @@ export class SolicitarEmergenciaPage implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router,
               private alertController: AlertController, private emergenciaservice: EmergenciaService,
-              private usuarioservice: UsuarioService, private gpsservice: GpsService, private tipoemergenciasservice:TipoemergenciaService,
-              private camaraservice:CameraService) {
+              private usuarioservice: UsuarioService, private gpsservice: GpsService, private tipoemergenciasservice: TipoemergenciaService,
+              private camaraservice: CameraService) {
     this.emergencia.Id_Usuario = this.usuarioservice.getUsuario().Id_Usuario;
-    this.TiposEmergencias=this.tipoemergenciasservice.tiposemergencias;
+    this.TiposEmergencias = this.tipoemergenciasservice.tiposemergencias;
     this.createForm();
     this.gpsservice.readActualPosition().then(posicion => {
       this.emergencia.Ubicacion = JSON.stringify(posicion);
+      this.ubicacion = JSON.stringify(posicion);
       console.log('Posición obtenida del Usuario: ', posicion)
     });
 
   }
 
-  tomarFoto(){
-    this.camaraservice.pickPhotos().then(
-      fotosarray=>{
-        const fotos:GalleryPhoto[]=fotosarray.photos;
-        fotos.forEach(foto=>{
-          this.fotosurl.push(foto.webPath);
-          console.log('Se a añadido una nueva foto a la galeria: '+foto.webPath);
-          // leer foto
+  async tomarFoto() {
+    const data = await this.camaraservice.getPhoto();
 
-          const response = await fetch (foto.webPath)
-          const blob = await response.blob();
-
-          // Convertir imagen a  base64
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            const base64data = reader.result.toString();
-            console.log('Imagen en base64:', base64data);
-          }
-
-        });
-      })
+    this.fotos.push(data)
+    this.fotosurl.push(data.webPath);
+    console.log('Se a añadido una nueva foto a la galeria: ' + data.webPath);
+    // leer foto
+    let blob = await fetch(data.webPath).then(r => r.blob());
+    console.log('Blob de la imagen: ', blob)
+    // Convertir imagen a  base64
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64data = reader.result.toString();
+      console.log('Imagen en base64:', base64data);
+      this.fotosBase64.push(base64data);
+    }
+    reader.readAsDataURL(blob);
   }
 
-  seleccionarFotos(){
-    this.camaraservice.getPhoto().then(data=>{
-      this.fotos.push(data)
-      this.fotosurl.push(data.webPath);
-      console.log('Se a añadido una nueva foto a la galeria: '+data.webPath);
+  async seleccionarFotos() {
+
+    let fotosarray = await this.camaraservice.pickPhotos();
+    const fotos: GalleryPhoto[] = fotosarray.photos;
+
+    for (let i = 0; i < fotos.length; i++) {
+      let foto = fotos[i];
+      this.fotosurl.push(foto.webPath);
+      console.log('Se a añadido una nueva foto a la galeria: ' + foto.webPath);
+      // leer foto
+      let blob = await fetch(foto.webPath).then(r => r.blob());
+      console.log('Blob de la imagen: ', blob)
+      // Convertir imagen a  base64
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64data = reader.result.toString();
+        console.log('Imagen en base64:', base64data);
+        this.fotosBase64.push(base64data);
+      }
+      reader.readAsDataURL(blob);
+    }
 
 
-
-    });
   }
 
-  // public valorZero: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-  //   const valor = control.value;
-  //   //console.log('Valor obtenido en el validador: '+valor);
-  //   if (valor === 0) {
-  //     return {valorZero: {value: control.value}};
-  //   }
-  //   return null;
-  // };
 
   ngOnInit() {
     console.log("Formulario, ", this.formularioEmergencia)
@@ -163,9 +166,8 @@ export class SolicitarEmergenciaPage implements OnInit {
 
   createForm(): void {
     this.formularioEmergencia = this.fb.group({
-      Ubicacion: [this.emergencia.Ubicacion, [Validators.required]],
       Departamento: [this.emergencia.Departamento, [Validators.required]],
-      Municipio: [this.emergencia.Municipio, [Validators.required, Validators.email]],
+      Municipio: [this.emergencia.Municipio, [Validators.required]],
       Descripcion_Lugar: [this.emergencia.Descripcion_Lugar, [Validators.required]],
       Descripcion_Emergencia: [this.emergencia.Descripcion_Emergencia, [Validators.required]],
       Cantidad_Personas_Afectadas: [this.emergencia.Cantidad_Personas_Afectadas, [Validators.required]],
@@ -220,16 +222,12 @@ export class SolicitarEmergenciaPage implements OnInit {
     const f = this.formularioEmergencia.value;
     console.log("Formulario a enviar: ", f);
     this.emergencia = this.formularioEmergencia.value;
+    this.emergencia.Ubicacion = this.ubicacion;
     this.emergencia.Id_Usuario = this.usuarioservice.getUsuario().Id_Usuario;
-    this.emergencia.Ubicacion = this.emergencia.Ubicacion;
-    this.emergencia.Departamento = this.emergencia.Departamento;
-    this.emergencia.Municipio = this.emergencia.Municipio;
-    this.emergencia.Descripcion_Emergencia = this.emergencia.Descripcion_Emergencia;
-    this.emergencia.Descripcion_Lugar = this.emergencia.Descripcion_Lugar;
-    this.emergencia.Cantidad_Personas_Afectadas = this.emergencia.Cantidad_Personas_Afectadas;
+    this.emergencia.Id_Tipo_Emergencia = 1;
 
-    console.log('Usuario a registrar: ', this.emergencia);
-    this.emergenciaservice.save(this.emergencia);
+    console.log('Emergencia a registrar: ', this.emergencia);
+    this.emergenciaservice.save(this.emergencia, this.fotosBase64);
     this.resetearForm();
 
 

@@ -16,7 +16,7 @@ export class EmergenciaService {
   private urldelete: string = "/delete";
 
   constructor(private apirest: ApirestService, private alertController: AlertController,
-              private router: Router, private photoservice:FotografiaService) {
+              private router: Router, private photoservice: FotografiaService) {
   }
 
   async emergenciaAlert(header: string, subheader: string) {
@@ -67,8 +67,9 @@ export class EmergenciaService {
         this.emergenciaAlertError('Emergencia No ha sido creada exitosamente', 'Vuelva a Intentarlo Por favor!!!');
       });
   }
+
 //OBTENER FOTO
-  save(emergencia: Emergencia): void {
+  save(emergencia: Emergencia, base64Fotos: string[]): void {
     this.apirest.put<Emergencia>(this.url, emergencia).subscribe(result => {
         console.log("Resultado de actualizar la emergencia: ");
         console.log(result);
@@ -78,13 +79,15 @@ export class EmergenciaService {
           }
         });
 
-
-        let tempFoto=new Fotografia();
-        tempFoto.Id_Emergencia=result.Id_Emergencia;
-        //tempFoto.ImageBase64=se lea la foto
-        //Añadir el envío de las fotos al restapi
-        this.photoservice.save(tempFoto);
-
+        for (let i = 0; i < base64Fotos.length; i++) {
+          let base64 = base64Fotos[i];
+          let tempFoto = new Fotografia();
+          tempFoto.Id_Emergencia = result.Id_Emergencia;
+          tempFoto.ImageBase64 = base64;
+          //tempFoto.ImageBase64=se lea la foto
+          //Añadir el envío de las fotos al restapi
+          this.photoservice.save(tempFoto);
+        }
 
 
         this.emergenciaAlert('Emergencia ha sido actualizada exitosamente', '');

@@ -101,16 +101,22 @@
         <ion-label class="ion-text-wrap" color="danger"> {{formErrors.Descripcion_Emergencia}} </ion-label>
       </ion-item>
 
-      <ion-button (click)="seleccionarFotos()" color="medium" expand="full">Tomar Foto</ion-button>
+      <ion-button (click)="seleccionarFotos()" color="medium" expand="full">Seleccionar Fotos</ion-button>
 
-      <ion-button (click)="tomarFoto()" color="medium" expand="full">Seleccionar Fotos</ion-button>
+      <ion-button (click)="tomarFoto()" color="medium" expand="full">Tomar Foto</ion-button>
+
+
+      <ion-item *ngIf="fotosBase64">
+        <div *ngFor="let item of fotosBase64;">
+          <ion-img src="{{item}}"></ion-img>
+        </div>
+      </ion-item>
 
 
     </ion-list>
     <ion-button [disabled]="formularioEmergencia.invalid" color="danger" type="submit"> Enviar Solicitud
       <ion-icon name="cloud-upload-outline"></ion-icon>
     </ion-button>
-
 
 
     <!--<ion-button (click)="enviarSolicitud()" color="medium" expand="full">Enviar Solicitud</ion-button> -->
